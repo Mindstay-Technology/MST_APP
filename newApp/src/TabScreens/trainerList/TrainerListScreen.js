@@ -4,8 +4,14 @@ import styles from '../../style/styles';
 import TrainerListData from './TrainerListData';
 import TrainerCardData from './TrainerCardData';
 
-const TrainerList = () => {
+const TrainerListScreen = () => {
+
+
   const [searchText, setSearchText] = useState('');
+
+  
+
+  //---------------------------------------
 
   return (
     <View style={styles.tListContainer}>
@@ -34,12 +40,12 @@ const TrainerList = () => {
         <TouchableOpacity>
           <Image
             source={require('../../assets/icons/bell.png')}
-            style={{width: 20, height: 20}}
+            style={{width: 20, height: 20, resizeMode:'contain'}}
           />
         </TouchableOpacity>
       </View>
 
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -54,13 +60,13 @@ const TrainerList = () => {
             style={{width: 20, height: 20}}
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <TrainerCardData />
+      {/* <TrainerCardData /> */}
 
       <TrainerListData />
     </View>
   );
 };
 
-export default TrainerList;
+export default TrainerListScreen;

@@ -14,11 +14,14 @@ const HomeScreen = () => {
         <Image source={require('../../assets/images/tab_logo.png')} />
 
         <View style={styles.searchView}>
-          <Icon
-            name="magnify"
-            size={30}
-            color="black"
-            style={styles.searchIconStyle}
+        <Image
+            source={require('../../assets/icons/magnify.png')}
+            style={{
+              width: 20,
+              height: 20,
+              alignSelf: 'center',
+              marginRight: '2%',
+            }}
           />
           <TextInput
             style={styles.searchInput}
@@ -29,7 +32,7 @@ const HomeScreen = () => {
           />
         </View>
         <TouchableOpacity>
-        <Image source={require('../../assets/icons/bell.png')} style={{width:20, height:25}} />
+        <Image source={require('../../assets/icons/bell.png')} style={{width:20, height:20, resizeMode:'contain'}} />
         </TouchableOpacity>
       </View>
 

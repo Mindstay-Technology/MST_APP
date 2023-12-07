@@ -92,7 +92,9 @@ const TrainerCardData = () => {
 
 
         </View>
-        <View style={styles.cardSessionStyle}></View>
+        <View style={styles.cardSessionStyle}>
+          <Text style={styles.cardSessionText}>+{item.session} Training Session</Text>
+        </View>
       </View>
     );
   };

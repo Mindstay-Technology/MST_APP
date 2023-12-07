@@ -1,34 +1,38 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../TabScreens/home/HomeScreen';
-import TrainerList from '../TabScreens/trainerList/TrainerList';
 import MyProgram from '../TabScreens/myProgram/MyProgram';
 import Chat from '../TabScreens/chat/Chat';
-//import Icon from 'react-native-vector-icons/Ionicons';
 import {Image, View, Text} from 'react-native';
+import TrainerListScreen from '../TabScreens/trainerList/TrainerListScreen';
+
+const CommonTabOptions = {
+  headerShown: false,
+  tabBarItemStyle: {
+    // borderColor: '#1111111A',
+    // borderWidth: 0.5,
+  },
+  tabBarActiveTintColor: '#2676C2',
+  tabBarInactiveTintColor: '#ffffff',
+};
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
     <Tab.Navigator
-          initialRouteName="TrainerList"
+      initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: true,
         tabBarStyle: {
           height: 60,
         },
-
-        }}
-        >
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
-          tabBarItemStyle: {
-            borderColor: '#1111111A',
-            borderWidth: 0.5,
-          },
+          ...CommonTabOptions,
+          tabBarLabel: 'Home',
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
@@ -40,26 +44,16 @@ const MyTabs = () => {
                   tintColor: focused ? '#2676C2' : '#8D8D8D',
                 }}
               />
-           
             </View>
           ),
-          tabBarLabel:'Home',
-          tabBarActiveTintColor:'#2676C2',
-          tabBarInactiveTintColor:'#ffffff'
-          
         }}
       />
 
-
       <Tab.Screen
-        name="TrainerList"
-        component={TrainerList}
-        options={{
-          headerShown: false,
-          tabBarItemStyle: {
-            borderColor: '#1111111A',
-            borderWidth: 0.5,
-          },
+        name="TrainerListScreen"
+        component={TrainerListScreen}
+        options={{   
+          ...CommonTabOptions,       
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
@@ -73,22 +67,15 @@ const MyTabs = () => {
               />
             </View>
           ),
-          tabBarLabel:'Trainer List',
-          tabBarActiveTintColor:'#2676C2',
-          tabBarInactiveTintColor:'#ffffff'
+          tabBarLabel: 'Trainer List',
         }}
       />
-
 
       <Tab.Screen
         name="MyProgram"
         component={MyProgram}
         options={{
-          headerShown: false,
-          tabBarItemStyle: {
-            borderColor: '#1111111A',
-            borderWidth: 0.5,
-          },
+          ...CommonTabOptions,
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
@@ -102,23 +89,15 @@ const MyTabs = () => {
               />
             </View>
           ),
-          tabBarLabel:'My Program',
-          tabBarActiveTintColor:'#2676C2',
-          tabBarInactiveTintColor:'#ffffff'
+          tabBarLabel: 'My Program',
         }}
       />
 
-      
       <Tab.Screen
         name="Chat"
         component={Chat}
         options={{
-          headerShown: false,
-          tabBarItemStyle: {
-            borderColor: '#1111111A',
-            borderWidth: 0.5,
-          },
-
+          ...CommonTabOptions,
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
@@ -132,9 +111,7 @@ const MyTabs = () => {
               />
             </View>
           ),
-          tabBarLabel:'Chat',
-          tabBarActiveTintColor:'#2676C2',
-          tabBarInactiveTintColor:'#ffffff'
+          tabBarLabel: 'Chat',
         }}
       />
     </Tab.Navigator>

@@ -721,7 +721,11 @@ export default StyleSheet.create({
     height: 2,
     backgroundColor: 'black',
   },
-
+  likeImage:{
+width:20,
+height:20,
+resizeMode:'contain'
+  },
   //----------------Styles for TrainerList ---------------------------
   tListContainer: {
     flex: 1,
@@ -770,6 +774,7 @@ export default StyleSheet.create({
   },
 
   flatListTListData: {
+   // flex:1,
     justifyContent: 'center',
     marginLeft: '5%',
     backgroundColor: '#ffffff',
@@ -945,11 +950,18 @@ export default StyleSheet.create({
     width: '100%',
     height: 30,
     position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     top: '85%',
     left: '0%',
   },
+  cardSessionText:{
+    color:'#ffffff',
+    fontSize:12,
+    fontWeight:'400',
+    marginLeft:'8%',
+    textAlign:'center',
+    marginTop:'1%'
+  }
 });

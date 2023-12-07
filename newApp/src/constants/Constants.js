@@ -17,7 +17,7 @@ export const Skills = [
 
 export const HomeData = [
   {
-    id:'1',
+    id:1,
     image: require('../assets/images/profile.png'),
     name: 'Abdul',
     skill: 'UI UX Designer',
@@ -28,7 +28,7 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:'2',
+    id:2,
     image: require('../assets/images/profile.png'),
     name: 'Abdul',
     skill: 'UI UX Designer',
@@ -39,7 +39,7 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:'3',
+    id:3,
     image: require('../assets/images/profile.png'),
     name: 'Abdul',
     skill: 'UI UX Designer',
@@ -50,7 +50,7 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:'4',
+    id:4,
     image: require('../assets/images/profile.png'),
     name: 'Abdul',
     skill: 'UI UX Designer',

@@ -1,11 +1,45 @@
-import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, Image, Modal} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HomeData} from '../../constants/Constants';
 import styles from '../../style/styles';
+import CommentModal from './CommentModal'
 
 const HomeListData = () => {
 
+  
+  const [data, setData] = useState(HomeData);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  // const [page, setPage] = useState(1);
+   const [loading, setLoading] = useState(false);
+
+
+
+  //-----------Comment Modal--------------
+
+  
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedPost, setSelectedPost] = useState();
+
+  const handleComment = (post, index) => {
+    setSelectedPost({ post, index });
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedPost(null);
+  };
+
+  const submitComment = (index, comment) => {
+    const updatedPosts = [...posts];
+    updatedPosts[index] = {
+      ...updatedPosts[index],
+      comments: [...(updatedPosts[index].comments || []), comment],
+    };
+    setPosts(updatedPosts);
+    closeModal();
+  };
 
   //---------------using redux-------------
 
@@ -45,44 +79,42 @@ const HomeListData = () => {
 
   //-------------without redux------------
 
-  //     const [data, setData] = useState([]);
-  //   const [page, setPage] = useState(1);
-  //   const [isLoading, setIsLoading] = useState(true);
 
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await Axios(`https://api.example.com/data?page=${page}`);
-  //       const newData = await response.json();
+  // const fetchData = async () => {
+  //   try {
+  //     setLoading(true);
 
-  //       setData((prevData) => [...prevData, ...newData]);
-  //       setPage((prevPage) => prevPage + 1);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchData();
-  //   }, []);
-
-  // const handleEndReached = () => {
-  //     // Fetch more data when the user reaches the end of the list
-  //     fetchData();
-  //   };
-
-  // if (isLoading) {
-  //     return (
-  //       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //         <ActivityIndicator size="large" color="blue" />
-  //       </View>
-  //     );
+  //     setData((prevData) => [...prevData, ...data]);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   } finally {
+  //     setLoading(false);
   //   }
+  // };
 
+  // useEffect(() => {
+  //   fetchData();
+  // }, [page]);
+
+  // const handleLoadMore = () => {
+  //   if (!loading) {
+  //     setPage((prevPage) => prevPage + 1);
+  //   }
+  // };
   //-----------------------------------------------------
 
-  const renderHomeData = ({item}) => {
+  
+
+
+
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index === selectedImageIndex ? null : index);
+  };
+
+  const getTintColor = (index) => (index === selectedImageIndex ? 'red' : '#8D8D8D');
+
+
+  const renderHomeData = ({item, index}) => {
     return (
       <View style={styles.flatListHomeData}>
         <View style={styles.homeRowView}>
@@ -98,17 +130,39 @@ const HomeListData = () => {
 
           <View
             style={{
-              marginLeft: '45%',
+              marginLeft: '40%',
               justifyContent: 'flex-end',
               flexDirection: 'row',
             }}>
-            <TouchableOpacity style={{marginRight: '5%'}}>
-              <Icon name="bookmark-outline" size={25} color="#8D8D8D" />
-            </TouchableOpacity>
+            <View>
+              <TouchableOpacity>
+                <Image
+                  source={require('../../assets/icons/save.png')}
+                  style={{
+                    width: 15,
+                    height: 15,
+                    alignSelf: 'center',
+                    marginRight: '2%',
+                  }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity>
-              <Icon name="dots-vertical" size={25} color="#8D8D8D" />
-            </TouchableOpacity>
+            <View style={{marginLeft: '15%'}}>
+              <TouchableOpacity>
+                <Image
+                  source={require('../../assets/icons/menu.png')}
+                  style={{
+                    width: 15,
+                    height: 15,
+                    alignSelf: 'center',
+                    marginRight: '2%',
+                  }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
@@ -129,16 +183,24 @@ const HomeListData = () => {
         </View>
 
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={{marginRight: '10%'}}>
-            <Image source = {require('../../assets/icons/like.png')} style={{width:24, height:24}}/>
-          
+          <TouchableOpacity style={{marginRight: '10%'}} onPress={() => handleImageClick(index)}>
+            <Image
+              source={require('../../assets/icons/like.png')}
+              style={[styles.likeImage, { tintColor: getTintColor(index)}]}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={{marginRight: '10%'}}>
-          <Image source = {require('../../assets/icons/comment.png')} style={{width:24, height:24}}/>
+          <TouchableOpacity style={{marginRight: '10%'}} onPress={()=>handleComment(item, index)}>
+            <Image
+              source={require('../../assets/icons/comment.png')}
+              style={{width: 24, height: 24}}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity>
-          <Image source = {require('../../assets/icons/send.png')} style={{width:24, height:24}}/>
+            <Image
+              source={require('../../assets/icons/send.png')}
+              style={{width: 24, height: 24}}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -150,21 +212,38 @@ const HomeListData = () => {
     <View style={styles.homeSeparatorStyle} />;
   };
 
+  
+  const renderFooter = () => {
+    return loading ? (
+      <ActivityIndicator style={{paddingBottom:20}} size="large" color="blue" />
+    ) : null;
+  };
+
   return (
     <View>
       <View style={styles.scrollViewContainer}>
         <Text style={styles.homeHeadText}>Based on your profile</Text>
-
+        {selectedPost && (
+        <CommentModal
+          isVisible={isModalVisible}
+          onClose={closeModal}
+          onSubmit={submitComment}
+          selectedPost={selectedPost}
+        />
+      )}
         <View>
           <FlatList
-            data={HomeData}
+            data={data}
             renderItem={renderHomeData}
             keyExtractor={keyExtractor}
             ItemSeparatorComponent={renderSeparator}
-            // onEndReached={handleEndReached}
-            // onEndReachedThreshold={0.1}
+           // onEndReached={handleLoadMore}
+             onEndReachedThreshold={0.1}
+            ListFooterComponent={renderFooter}
+           // contentContainerStyle={{ flexGrow: 1 }}
           />
         </View>
+        
       </View>
     </View>
   );
