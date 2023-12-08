@@ -717,6 +717,12 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
   },
+  likeText: {
+    position: 'absolute',
+    fontSize: 24,
+    color: 'blue',
+    fontWeight:'bold'
+  },
   homeSeparatorStyle: {
     height: 2,
     backgroundColor: 'black',

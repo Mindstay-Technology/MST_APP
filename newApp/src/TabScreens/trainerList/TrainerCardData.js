@@ -1,14 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, FlatList, Dimensions, Image, Animated} from 'react-native';
+import {View, Text, FlatList, Dimensions, Image, Animated, TouchableOpacity} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import styles from '../../style/styles';
 import StarRating from 'react-native-star-rating';
 import { TListData } from '../../constants/Constants';
+import DetailsModal from './DetailsModal';
 
 
 const TrainerCardData = () => {
 
-  
+  const [selectedTrainer, setSelectedTrainer] = useState();
+  const [isTrainerDetailsVisible, setIsTrainerDetailsVisible] = useState(false);
+
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -31,8 +34,21 @@ const TrainerCardData = () => {
     return () => clearInterval(intervalId);
   }, [showCardData, interval]);
 
+  //-----------------Trainer Details modal----
+
+  const handleTrainerData = (item, index) => {
+    setSelectedTrainer({ item, index });
+    setIsTrainerDetailsVisible(true);
+  };
+
+  const closeDetailModal = () => {
+    setIsTrainerDetailsVisible(false);
+    setSelectedTrainer(null);
+  };
+
   const renderItem = ({item}) => {
     return (
+      <TouchableOpacity onPress={() => handleTrainerData(item, index)}>
       <View style={styles.tListCardData}>
         <View style={styles.cardRowData}>
           <View>
@@ -96,6 +112,7 @@ const TrainerCardData = () => {
           <Text style={styles.cardSessionText}>+{item.session} Training Session</Text>
         </View>
       </View>
+      </TouchableOpacity>
     );
   };
 
@@ -108,6 +125,14 @@ const TrainerCardData = () => {
        // borderWidth: 1,
         //borderColor: 'green',
       }}>
+
+{selectedTrainer && (
+        <DetailsModal
+          isVisible={isTrainerDetailsVisible}
+          onClose={closeDetailModal}
+          selectedTrainer={selectedTrainer}
+        />
+      )}
       <Carousel
         data={showCardData}
         renderItem={renderItem}
@@ -136,8 +161,6 @@ const TrainerCardData = () => {
         }}
         inactiveDotOpacity={0.4}
         inactiveDotScale={1}
-
-
       />
      
     </View>

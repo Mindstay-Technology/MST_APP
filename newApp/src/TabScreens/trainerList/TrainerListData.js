@@ -11,7 +11,8 @@ import styles from '../../style/styles';
 import {TListData} from '../../constants/Constants';
 import StarRating from 'react-native-star-rating';
 import TrainerCardData from './TrainerCardData';
-import FilterTrainerModal from './FilterTrainerModal'
+import FilterModal from './FilterModal'
+import DetailsModal from './DetailsModal';
 
 const TrainerListData = () => {
   const [data, setData] = useState(TListData);
@@ -40,8 +41,40 @@ const TrainerListData = () => {
   //   }
   // };
 
-  const renderTListData = ({item}) => {
+  
+  //------------Filtering the Data Modal-------------------
+
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isTrainerDetailsVisible, setIsTrainerDetailsVisible] = useState(false);
+  const [filterData, setFilterData] = useState(false);
+  const [selectedTrainer, setSelectedTrainer] = useState();
+
+  const handleFilter = (item, index) => {
+    setModalVisible(true);
+  };
+
+  const closeFilterModal = () => {
+    setModalVisible(false);
+  };
+
+  //-------------------- trainer details Modal-------------
+
+
+  const handleTrainerData = (item, index) => {
+    setSelectedTrainer({ item, index });
+    setIsTrainerDetailsVisible(true);
+  };
+
+  const closeDetailModal = () => {
+    setIsTrainerDetailsVisible(false);
+    setSelectedTrainer(null);
+  };
+
+//------------------------------------------------------------------------------------
+  const renderTListData = ({item, index}) => {
     return (
+      <TouchableOpacity onPress={() => handleTrainerData(item, index)}>
       <View style={styles.flatListTListData}>
         <View style={styles.tListRowView}>
           <View style={{marginLeft: '0%'}}>
@@ -107,6 +140,7 @@ const TrainerListData = () => {
           </Text>
         </View>
       </View>
+      </TouchableOpacity>
     );
   };
 
@@ -122,20 +156,6 @@ const TrainerListData = () => {
     ) : null;
   };
 
-  //------------Filtering the Data
-
-
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [filterData, setFilterData] = useState(false);
-
-  const handleFilter = (post, index) => {
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-  //--------------------
 
   return (
     <View>
@@ -157,12 +177,20 @@ const TrainerListData = () => {
       </View>
 
       {isModalVisible &&
-        <FilterTrainerModal
+        <FilterModal
           isVisible={isModalVisible}
-          onClose={closeModal}
+          onClose={closeFilterModal}
         //  onSubmit={submitComment}
           //selectedPost={selectedPost}
         />}
+
+    {selectedTrainer && (
+        <DetailsModal
+          isVisible={isTrainerDetailsVisible}
+          onClose={closeDetailModal}
+          selectedTrainer={selectedTrainer}
+        />
+      )}
 
       <TrainerCardData />
 

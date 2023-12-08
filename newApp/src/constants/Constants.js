@@ -77,6 +77,17 @@ export const TListData = [
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
     },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -91,6 +102,17 @@ export const TListData = [
       react:require('../assets/icons/react.png'),
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
+    },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
     },
   },
   {
@@ -107,6 +129,17 @@ export const TListData = [
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
     },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -121,6 +154,17 @@ export const TListData = [
       react:require('../assets/icons/react.png'),
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
+    },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
     },
   },
 
@@ -138,6 +182,17 @@ export const TListData = [
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
     },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -152,6 +207,17 @@ export const TListData = [
       react:require('../assets/icons/react.png'),
       python:require('../assets/icons/python.png'),
       java:require('../assets/icons/java.png'),
+    },
+    bannerImage:require('../assets/images/learning.png'),
+    profile:'Passionate about Crafting Seamless Experiences',
+    content :
+    "I'm Kowshik, a dedicated UI/UX Developer and Trainer. With a keen eye for design and a commitment to education, I'm on a mission to share my expertise with aspiring designers.",
+    certification:{
+      title:'Certifications',
+      designation: 'Certified UI/UX Professional: ',
+      organization:'Stanford university',
+      content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
+      certificate:require('../assets/images/certificate.png')
     },
   },
 

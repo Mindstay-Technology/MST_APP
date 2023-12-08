@@ -1,10 +1,12 @@
-import {View, Text, FlatList, TouchableOpacity, Image, Modal} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, Image, Modal, Animated} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {HomeData} from '../../constants/Constants';
 import styles from '../../style/styles';
 import CommentModal from './CommentModal'
 
 const HomeListData = () => {
+
+  
 
   
   const [data, setData] = useState(HomeData);
@@ -21,8 +23,8 @@ const HomeListData = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState();
 
-  const handleComment = (post, index) => {
-    setSelectedPost({ post, index });
+  const handleComment = (item, index) => {
+    setSelectedPost({ item, index });
     setModalVisible(true);
   };
 
@@ -106,12 +108,14 @@ const HomeListData = () => {
   
 
 
+//----------Like ----------------------
 
-  const handleImageClick = (index) => {
-    setSelectedImageIndex(index === selectedImageIndex ? null : index);
+
+  const handleLike = (index) => {
+    setSelectedImageIndex(index === selectedImageIndex ? null : index);    
   };
 
-  const getTintColor = (index) => (index === selectedImageIndex ? 'red' : '#8D8D8D');
+  const getLikeColor = (index) => (index === selectedImageIndex ? 'red' : '#8D8D8D');
 
 
   const renderHomeData = ({item, index}) => {
@@ -182,13 +186,14 @@ const HomeListData = () => {
           <Text style={styles.homeAvailableStyle1}>{item.available}</Text>
         </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={{marginRight: '10%'}} onPress={() => handleImageClick(index)}>
+        <View style={{flexDirection: 'row', marginBottom:'2%'}}>
+          <TouchableOpacity style={{marginRight: '10%'}} onPress={() => handleLike(index)}>
             <Image
               source={require('../../assets/icons/like.png')}
-              style={[styles.likeImage, { tintColor: getTintColor(index)}]}
+              style={[styles.likeImage, { tintColor: getLikeColor(index)}]}
             />
           </TouchableOpacity>
+        
           <TouchableOpacity style={{marginRight: '10%'}} onPress={()=>handleComment(item, index)}>
             <Image
               source={require('../../assets/icons/comment.png')}
@@ -203,6 +208,7 @@ const HomeListData = () => {
             />
           </TouchableOpacity>
         </View>
+        <View style={{width:'98%', height:1, backgroundColor:'#D9D9D9', alignSelf:'center'}}/>
       </View>
     );
   };
@@ -236,14 +242,18 @@ const HomeListData = () => {
             data={data}
             renderItem={renderHomeData}
             keyExtractor={keyExtractor}
+            scrollEnabled
             ItemSeparatorComponent={renderSeparator}
            // onEndReached={handleLoadMore}
              onEndReachedThreshold={0.1}
-            ListFooterComponent={renderFooter}
            // contentContainerStyle={{ flexGrow: 1 }}
           />
         </View>
-        
+        <View style={{width:50, height:50, borderRadius:25, backgroundColor:'#2676C2', position:'absolute', justifyContent:'center', top:'78%', left:'82%'}}>
+          <TouchableOpacity>
+            <Text style={{color:'#ffffff', textAlign:'center', fontSize:16, fontWeight:'600'}}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
