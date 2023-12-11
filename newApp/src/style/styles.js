@@ -163,7 +163,7 @@ export default StyleSheet.create({
     // height: 1,
     // backgroundColor: 'black',
     width: '10%',
-    borderBottomColor: '#ffffff', // You can change the color as needed
+    borderBottomColor: '#FFFFFF33', // You can change the color as needed
     borderBottomWidth: 1,
   },
   orWithText: {
@@ -173,7 +173,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     marginHorizontal: '1%',
   },
-  emailCatView: {
+  emailGitHubView: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     // marginHorizontal: '10%',

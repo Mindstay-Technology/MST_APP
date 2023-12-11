@@ -88,6 +88,11 @@ export const TListData = [
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
     },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -113,6 +118,11 @@ export const TListData = [
       organization:'Stanford university',
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
+    },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
     },
   },
   {
@@ -140,6 +150,11 @@ export const TListData = [
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
     },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -165,6 +180,11 @@ export const TListData = [
       organization:'Stanford university',
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
+    },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
     },
   },
 
@@ -193,6 +213,11 @@ export const TListData = [
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
     },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
+    },
   },
   {
     image: require('../assets/images/profile.png'),
@@ -219,6 +244,26 @@ export const TListData = [
       content:"Embark on a learning journey that goes beyond the basics. This certification signifies mastery in UI/UX principles, emphasizing hands-on skills and a deep understanding of user-centered design. Explore the intricacies of creating intuitive interfaces, user behaviors, and crafting engaging user experiences.",
       certificate:require('../assets/images/certificate.png')
     },
+    langPercent:{
+      react:'70',
+      python:'50',
+      java:'66'
+    },
   },
 
 ];
+
+export const MyProgramData = [
+  {
+    postedDate:'02/11/2023',
+    lastUpdated:'01/11/2023',
+    trainingProgramName:'Full Stack Developer',
+    subjects:'Java,  Js, Python, React Native, c sharp, j query, API Design.....More ',
+    typeOfTraining:'Corporate',
+    trainingDuration: '10',
+    totalParticipants: '205',
+    mode:'Online',
+    location:'Bangalore',
+
+  },
+]

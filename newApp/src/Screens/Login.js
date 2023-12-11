@@ -122,7 +122,7 @@ const Login = () => {
             <View style={styles.hrLine} />
           </View>
 
-          <View style={styles.emailCatView}>
+          <View style={styles.emailGitHubView}>
             <TouchableOpacity>
               <Image
                 source={require('../assets/images/email.png')}
