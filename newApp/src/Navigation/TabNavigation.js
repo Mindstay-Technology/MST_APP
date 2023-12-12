@@ -10,6 +10,8 @@ const CommonTabOptions = {
   tabBarItemStyle: {
     // borderColor: '#1111111A',
     // borderWidth: 0.5,
+     margin:'2%',
+    alignItems:'center'
   },
   tabBarActiveTintColor: '#2676C2',
   tabBarInactiveTintColor: '#ffffff',
@@ -20,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="MyProgram"
       screenOptions={{
         tabBarShowLabel: true,
         tabBarStyle: {
@@ -33,13 +35,14 @@ const MyTabs = () => {
         options={{
           ...CommonTabOptions,
           tabBarLabel: 'Home',
+          
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
                 source={require('../assets/icons/home.png')}
                 style={{
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                   resizeMode: 'contain',
                   tintColor: focused ? '#2676C2' : '#8D8D8D',
                 }}
@@ -59,8 +62,8 @@ const MyTabs = () => {
               <Image
                 source={require('../assets/icons/tr_list.png')}
                 style={{
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                   resizeMode: 'contain',
                   tintColor: focused ? '#2676C2' : '#8D8D8D',
                 }}
@@ -81,8 +84,8 @@ const MyTabs = () => {
               <Image
                 source={require('../assets/icons/myprogram.png')}
                 style={{
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                   resizeMode: 'contain',
                   tintColor: focused ? '#2676C2' : '#8D8D8D',
                 }}
@@ -103,8 +106,8 @@ const MyTabs = () => {
               <Image
                 source={require('../assets/icons/chat.png')}
                 style={{
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                   resizeMode: 'contain',
                   tintColor: focused ? '#2676C2' : '#8D8D8D',
                 }}

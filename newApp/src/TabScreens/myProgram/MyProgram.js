@@ -1,12 +1,13 @@
-import { View, Text, FlatList,ScrollView} from 'react-native'
-import React from 'react'
+import { View, Text,ScrollView, Image, TextInput, TouchableOpacity} from 'react-native'
+import React, { useState } from 'react'
 import styles from './MyProgramStyles'
 import {MyProgramData} from '../../constants/Constants'
 import FlatListData from './FlatListData'
 
 const MyProgramScreen = () => {
+  const [searchText, setSearchText] =useState('');
   return (
-    <View style={style.programScreenContainer}>
+    <View style={styles.programScreenContainer}>
     <View style={styles.headerView}>
         <Image source={require('../../assets/images/tab_logo.png')} />
 
@@ -33,7 +34,7 @@ const MyProgramScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={{marginLeft:'3%'}}>
+      <ScrollView style={{ marginTop:'5%'}}>
         <Text style={styles.headTextStyle}>On Going Program</Text>
 
         <View>

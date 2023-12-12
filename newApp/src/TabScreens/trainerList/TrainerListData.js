@@ -74,7 +74,9 @@ const TrainerListData = () => {
 //------------------------------------------------------------------------------------
   const renderTListData = ({item, index}) => {
     return (
-      <TouchableOpacity onPress={() => handleTrainerData(item, index)}>
+      <TouchableOpacity 
+      onPress={() => handleTrainerData(item, index)}
+      >
       <View style={styles.flatListTListData}>
         <View style={styles.tListRowView}>
           <View style={{marginLeft: '0%'}}>

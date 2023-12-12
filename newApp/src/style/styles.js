@@ -616,12 +616,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#EEEEEE',
     borderRadius: 10,
     paddingHorizontal: 10,
     marginHorizontal: '1%',
     width: '70%',
-    opacity: 0.4,
+  //  opacity: 0.4,
     backgroundColor: '#ffffff',
   },
   searchIconStyle: {
@@ -630,7 +630,7 @@ export default StyleSheet.create({
   },
   searchInput: {
     height: 40,
-    color: 'black',
+    color: '#8D8D8D',
     fontSize: 12,
     fontWeight: '400',
   },

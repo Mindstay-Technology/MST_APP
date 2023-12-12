@@ -50,7 +50,7 @@ const EmployerScreen = ({navigation}) => {
     } else if(designation.length===0){
       setDesignationError('Please Enter The Designation')
     } else {
-      // navigation.navigate('');
+       navigation.navigate('MyTabs');
     }
   };
 

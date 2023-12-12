@@ -1,8 +1,9 @@
-import {View, Text, FlatList, TouchableOpacity, Image, Modal, Animated} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, Image, Modal, Animated, ScrollView} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {HomeData} from '../../constants/Constants';
 import styles from '../../style/styles';
 import CommentModal from './CommentModal'
+import Icon from 'react-native-vector-icons/Entypo'
 
 const HomeListData = () => {
 
@@ -11,6 +12,8 @@ const HomeListData = () => {
   
   const [data, setData] = useState(HomeData);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [isLiked, setIsLiked] = useState(false)
+  const [likedPost, setLikedPost] =useState([])
 
   // const [page, setPage] = useState(1);
    const [loading, setLoading] = useState(false);
@@ -112,10 +115,17 @@ const HomeListData = () => {
 
 
   const handleLike = (index) => {
-    setSelectedImageIndex(index === selectedImageIndex ? null : index);    
+
+    const isLiked = likedPost.includes(index);
+    const updatedLikes = isLiked
+      ? likedPost.filter((id) => id !== index)
+      : [...likedPost, index];
+      setIsLiked(true)
+    setLikedPost(updatedLikes);
+   // setSelectedImageIndex(index === selectedImageIndex ? null : index);    
   };
 
-  const getLikeColor = (index) => (index === selectedImageIndex ? 'red' : '#8D8D8D');
+  //const getLikeColor = (index) => (index === likedPost ? '#2676C2' : '#8D8D8D');
 
 
   const renderHomeData = ({item, index}) => {
@@ -189,22 +199,22 @@ const HomeListData = () => {
         <View style={{flexDirection: 'row', marginBottom:'2%'}}>
           <TouchableOpacity style={{marginRight: '10%'}} onPress={() => handleLike(index)}>
             <Image
-              source={require('../../assets/icons/like.png')}
-              style={[styles.likeImage, { tintColor: getLikeColor(index)}]}
+              source={!isLiked ? require('../../assets/icons/like.png') : require('../../assets/icons/liked.png')}
+              style={styles.likeImage}
             />
           </TouchableOpacity>
         
           <TouchableOpacity style={{marginRight: '10%'}} onPress={()=>handleComment(item, index)}>
             <Image
               source={require('../../assets/icons/comment.png')}
-              style={{width: 24, height: 24}}
+              style={{width: 20, height: 20, resizeMode:'contain'}}
             />
           </TouchableOpacity>
 
           <TouchableOpacity>
             <Image
               source={require('../../assets/icons/send.png')}
-              style={{width: 24, height: 24}}
+              style={{width: 20, height: 20, resizeMode:'contain'}}
             />
           </TouchableOpacity>
         </View>
@@ -227,6 +237,7 @@ const HomeListData = () => {
 
   return (
     <View>
+    <ScrollView>
       <View style={styles.scrollViewContainer}>
         <Text style={styles.homeHeadText}>Based on your profile</Text>
         {selectedPost && (
@@ -249,12 +260,13 @@ const HomeListData = () => {
            // contentContainerStyle={{ flexGrow: 1 }}
           />
         </View>
-        <View style={{width:50, height:50, borderRadius:25, backgroundColor:'#2676C2', position:'absolute', justifyContent:'center', top:'78%', left:'82%'}}>
+        <View style={{width:50, height:50, borderRadius:25, backgroundColor:'#2676C2', position:'absolute', justifyContent:'center', top:'86%', left:'82%'}}>
           <TouchableOpacity>
             <Text style={{color:'#ffffff', textAlign:'center', fontSize:16, fontWeight:'600'}}>+</Text>
           </TouchableOpacity>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

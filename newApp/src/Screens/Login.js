@@ -10,21 +10,23 @@ import {
 import React, {useState, useRef, useEffect} from 'react';
 import styles from '../style/styles';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+//import Icon from 'react-native-vector-icons/Ionicons';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //import { useDispatch, useSelector } from 'react-redux';
 //import {setNumber, getOTP} from '../redux/actions'
 
 
+
 const Login = () => {
+
+  const navigation = useNavigation();
 
   // const dispatch = useDispatch();
   // const number = useSelector((state) => state.auth.number);
 
   const [number, setNumber] = useState('');
   const [numberError, setNumberError] = useState('');
-  const navigation = useNavigation();
   const [customStyle, setCustomStyle] = useState({
     fontSize: 14,
     fontWeight: '400',
@@ -83,7 +85,7 @@ const Login = () => {
           <Text style={styles.mobileText}>Mobile number</Text>
           <TextInput
             style={[
-              styles.inputField,
+              styles.inputField, 
               {
                 fontSize: customStyle.fontSize,
                 fontWeight: customStyle.fontWeight,

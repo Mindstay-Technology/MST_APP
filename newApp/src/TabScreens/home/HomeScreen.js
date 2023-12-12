@@ -21,6 +21,7 @@ const HomeScreen = () => {
               height: 20,
               alignSelf: 'center',
               marginRight: '2%',
+              resizeMode:'contain'
             }}
           />
           <TextInput

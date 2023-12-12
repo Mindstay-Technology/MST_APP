@@ -12,27 +12,27 @@ import {
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import styles from './TrainerListStyle';
-import {TListData} from '../../constants/Constants'
+//import {TListData} from '../../constants/Constants'
 import HamburgerModal from './HamburgerModal'
-import HireNowModal from './SuccessModals';
+import {HireNowModal} from './SuccessModals';
 
 const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
 
   const item = selectedTrainer.item;
   const index = selectedTrainer.index;
 
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [buttonText, setButtonText] = useState('Hire Now');
   const [hireNowSuccess, setHireNowSuccess] = useState(false);
 
 
 //------------------------Hamburger Modal------
   const showHamburgerModal = (item, index) => {
-    setModalVisible(true);
+    setIsModalVisible(true);
   };
 
   const closeHamburgerModal = () => {
-    setModalVisible(false);
+    setIsModalVisible(false);
   };
 
   //-------------------hire now success message---------------
@@ -96,7 +96,9 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <TouchableOpacity onPress={()=>showHamburgerModal()}>
+              <TouchableOpacity 
+               onPress={()=>showHamburgerModal({item, index})}
+              >
                 <Image
                   source={require('../../assets/icons/menu.png')}
                   style={{width: 15, height: 15, resizeMode: 'contain'}}
@@ -149,12 +151,14 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
 
           </ScrollView>
           <View style={styles.hireButton}>
-            <TouchableOpacity onPress={()=>handleHireNow()}>
+            <TouchableOpacity 
+             onPress={()=>handleHireNow()}
+            >
               <Text style={styles.hireText}>{buttonText}</Text>
             </TouchableOpacity>
           </View>
           
-          {setHireNowSuccess && ( 
+          {hireNowSuccess && ( 
             <HireNowModal/>
           )}
           
