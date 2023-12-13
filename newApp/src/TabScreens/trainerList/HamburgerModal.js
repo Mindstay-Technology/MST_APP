@@ -1,6 +1,6 @@
 import {View, Text, Modal, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
-import styles from './TrainerListStyle';
+import styles from './Styles/TrainerListStyle';
 import { ConnectModal } from './SuccessModals';
 
 const HamburgerModal = ({isVisible, onClose}) => {

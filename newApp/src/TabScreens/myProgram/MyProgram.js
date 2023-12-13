@@ -1,6 +1,6 @@
 import { View, Text,ScrollView, Image, TextInput, TouchableOpacity} from 'react-native'
 import React, { useState } from 'react'
-import styles from './MyProgramStyles'
+import styles from './styles/MyProgramStyles'
 import {MyProgramData} from '../../constants/Constants'
 import FlatListData from './FlatListData'
 

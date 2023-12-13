@@ -11,7 +11,7 @@ import {
   FlatList
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
-import styles from './TrainerListStyle';
+import styles from './Styles/TrainerListStyle';
 //import {TListData} from '../../constants/Constants'
 import HamburgerModal from './HamburgerModal'
 import {HireNowModal} from './SuccessModals';

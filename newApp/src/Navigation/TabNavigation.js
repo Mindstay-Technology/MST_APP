@@ -4,6 +4,7 @@ import MyProgram from '../TabScreens/myProgram/MyProgram';
 import Chat from '../TabScreens/chat/Chat';
 import {Image, View, Text} from 'react-native';
 import TrainerListScreen from '../TabScreens/trainerList/TrainerListScreen';
+import PostTabs from '../TabScreens/PostScreens/PostTabs';
 
 const CommonTabOptions = {
   headerShown: false,
@@ -22,7 +23,7 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="MyProgram"
+      initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: true,
         tabBarStyle: {
@@ -117,6 +118,8 @@ const MyTabs = () => {
           tabBarLabel: 'Chat',
         }}
       />
+            <Tab.Screen name="PostTabs" component={PostTabs} />
+
     </Tab.Navigator>
   );
 };

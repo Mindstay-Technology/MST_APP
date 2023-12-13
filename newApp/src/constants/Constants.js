@@ -15,6 +15,33 @@ export const Skills = [
   {label: 'Java', value: 'Java'},
 ];
 
+export const TypeTrainingOptions = [
+  {label: 'Corporate Training', value: 0},
+  {label: 'College Training', value: 1},
+  {label: 'Individual', value: 2},
+];
+
+export const DurationTrainingOptions = [
+  {label: 'Hourly', value: 0},
+  {label: 'Day', value: 1},
+  {label: 'Month', value: 2},
+];
+
+export const ModeTrainingOptions = [
+  {label: 'Offline', value: 0},
+  {label: 'Online', value: 1},
+];
+export const Currency = [
+  {label: 'IND', value: 'IND'},
+  {label: 'UAE', value: 'UAE'},
+  {label: 'USD', value: 'USD'},
+  {label: 'Euro', value: 'Euro'},
+];
+
+export const TOC = [
+  {label:'Available' , value:'Available'},
+  {label:'Unavailable' , value:'Unavailable'},
+]
 export const HomeData = [
   {
     id:1,

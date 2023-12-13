@@ -1,50 +1,23 @@
 import {View, Text, FlatList, TouchableOpacity, Image, Modal, Animated, ScrollView} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,} from 'react';
 import {HomeData} from '../../constants/Constants';
 import styles from '../../style/styles';
 import CommentModal from './CommentModal'
 import Icon from 'react-native-vector-icons/Entypo'
 
 const HomeListData = () => {
-
-  
-
   
   const [data, setData] = useState(HomeData);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isLiked, setIsLiked] = useState(false)
-  const [likedPost, setLikedPost] =useState([])
+  const [likedPost, setLikedPost] =useState([]);
+  
+  const [isCommentModal, setIsCommentModal] = useState(false);
+  const [postComment, setPostComment] = useState();
 
   // const [page, setPage] = useState(1);
    const [loading, setLoading] = useState(false);
 
-
-
-  //-----------Comment Modal--------------
-
-  
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedPost, setSelectedPost] = useState();
-
-  const handleComment = (item, index) => {
-    setSelectedPost({ item, index });
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-    setSelectedPost(null);
-  };
-
-  const submitComment = (index, comment) => {
-    const updatedPosts = [...posts];
-    updatedPosts[index] = {
-      ...updatedPosts[index],
-      comments: [...(updatedPosts[index].comments || []), comment],
-    };
-    setPosts(updatedPosts);
-    closeModal();
-  };
 
   //---------------using redux-------------
 
@@ -112,21 +85,39 @@ const HomeListData = () => {
 
 
 //----------Like ----------------------
-
-
   const handleLike = (index) => {
 
-    const isLiked = likedPost.includes(index);
-    const updatedLikes = isLiked
-      ? likedPost.filter((id) => id !== index)
-      : [...likedPost, index];
-      setIsLiked(true)
-    setLikedPost(updatedLikes);
+    setLikedPost((prevLikedItems) => ({
+      ...prevLikedItems,
+      [index]: !prevLikedItems[index],
+    }));
    // setSelectedImageIndex(index === selectedImageIndex ? null : index);    
   };
 
   //const getLikeColor = (index) => (index === likedPost ? '#2676C2' : '#8D8D8D');
 
+  
+
+  //-----------Comment Modal--------------
+  const handleComment = (item, index) => {
+    setPostComment({ item, index });
+    setIsCommentModal(true);
+  };
+
+  const closeModal = () => {
+    setIsCommentModal(false);
+    setPostComment(null);
+  };
+
+  const submitComment = (index, comment) => {
+    const updatedPosts = [...posts];
+    updatedPosts[index] = {
+      ...updatedPosts[index],
+      comments: [...(updatedPosts[index].comments || []), comment],
+    };
+    setPosts(updatedPosts);
+    closeModal();
+  };
 
   const renderHomeData = ({item, index}) => {
     return (
@@ -240,12 +231,12 @@ const HomeListData = () => {
     <ScrollView>
       <View style={styles.scrollViewContainer}>
         <Text style={styles.homeHeadText}>Based on your profile</Text>
-        {selectedPost && (
+        {postComment && (
         <CommentModal
-          isVisible={isModalVisible}
+          isVisible={isCommentModal}
           onClose={closeModal}
           onSubmit={submitComment}
-          selectedPost={selectedPost}
+          selectedPost={postComment}
         />
       )}
         <View>
@@ -260,13 +251,10 @@ const HomeListData = () => {
            // contentContainerStyle={{ flexGrow: 1 }}
           />
         </View>
-        <View style={{width:50, height:50, borderRadius:25, backgroundColor:'#2676C2', position:'absolute', justifyContent:'center', top:'86%', left:'82%'}}>
-          <TouchableOpacity>
-            <Text style={{color:'#ffffff', textAlign:'center', fontSize:16, fontWeight:'600'}}>+</Text>
-          </TouchableOpacity>
-        </View>
+        
       </View>
       </ScrollView>
+      
     </View>
   );
 };

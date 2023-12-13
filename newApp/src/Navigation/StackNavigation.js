@@ -37,8 +37,10 @@ const Navigation = () => {
         <Stack.Screen name="EmployerScreen" component={EmployerScreen} />
         <Stack.Screen name="TrainerScreen" component={TrainerScreen} />
         <Stack.Screen name="MyTabs" component={MyTabs} />
+        <Tab.Screen name="PostTabs" component={PostTabs} />
       </Stack.Navigator> */}
       <MyTabs/>
+      
     </NavigationContainer>
   );
 };

@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import styles from './TrainerListStyle'
+import styles from './Styles/TrainerListStyle'
 
 const FilterModal = ({isVisible, onClose}) => {
   const [commentInput, setCommentInput] = useState('');

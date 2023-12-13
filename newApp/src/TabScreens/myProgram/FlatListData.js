@@ -1,6 +1,6 @@
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
-import styles from './MyProgramStyles';
+import styles from './styles/MyProgramStyles';
 //import OrderStatusAnimation from './orderStatus';
 import ProgressStatus from './ProgressStatus';
 
