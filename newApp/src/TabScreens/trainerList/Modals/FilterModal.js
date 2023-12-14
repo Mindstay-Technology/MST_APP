@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import styles from './Styles/TrainerListStyle'
+import styles from '../Styles/TrainerListStyle'
 
 const FilterModal = ({isVisible, onClose}) => {
   const [commentInput, setCommentInput] = useState('');
@@ -37,7 +37,7 @@ const FilterModal = ({isVisible, onClose}) => {
       <View style={styles.filterModalContent}>
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
           <Image
-            source={require('../../assets/icons/close.png')}
+            source={require('../../../assets/icons/close.png')}
             style={styles.closeImageStyle}
           />
         </TouchableOpacity>

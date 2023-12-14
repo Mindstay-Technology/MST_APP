@@ -9,14 +9,11 @@ const HomeListData = () => {
   
   const [data, setData] = useState(HomeData);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-  const [isLiked, setIsLiked] = useState(false)
   const [likedPost, setLikedPost] =useState([]);
-  
+  const [savedPost, setSavedPost] = useState([]);  
   const [isCommentModal, setIsCommentModal] = useState(false);
   const [postComment, setPostComment] = useState();
-
-  // const [page, setPage] = useState(1);
-   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   //---------------using redux-------------
@@ -84,19 +81,24 @@ const HomeListData = () => {
   
 
 
-//----------Like ----------------------
+//----------Like  ----------------------
   const handleLike = (index) => {
+    const updatedLikedPosts = likedPost.includes(index)
+    ? likedPost.filter((id) => id !== index)
+    : [...likedPost, index];
 
-    setLikedPost((prevLikedItems) => ({
-      ...prevLikedItems,
-      [index]: !prevLikedItems[index],
-    }));
-   // setSelectedImageIndex(index === selectedImageIndex ? null : index);    
+  setLikedPost(updatedLikedPosts);
   };
 
-  //const getLikeColor = (index) => (index === likedPost ? '#2676C2' : '#8D8D8D');
+  //-----------Save------------------
 
-  
+  const handleSave=(index) =>{
+    const updatedSavedPosts = savedPost.includes(index)
+    ? savedPost.filter((id)=>  id !== index)
+    : [...savedPost, index];
+
+  setSavedPost(updatedSavedPosts);
+  }
 
   //-----------Comment Modal--------------
   const handleComment = (item, index) => {
@@ -109,17 +111,19 @@ const HomeListData = () => {
     setPostComment(null);
   };
 
-  const submitComment = (index, comment) => {
-    const updatedPosts = [...posts];
-    updatedPosts[index] = {
-      ...updatedPosts[index],
-      comments: [...(updatedPosts[index].comments || []), comment],
-    };
-    setPosts(updatedPosts);
-    closeModal();
-  };
+  // const submitComment = (index, comment) => {
+  //   const updatedPosts = [...posts];
+  //   updatedPosts[index] = {
+  //     ...updatedPosts[index],
+  //     comments: [...(updatedPosts[index].comments || []), comment],
+  //   };
+  //   setPosts(updatedPosts);
+  //   closeModal();
+  // };
 
   const renderHomeData = ({item, index}) => {
+    const isLiked = likedPost.includes(index);
+    const isSaved = savedPost.includes(index);
     return (
       <View style={styles.flatListHomeData}>
         <View style={styles.homeRowView}>
@@ -140,9 +144,9 @@ const HomeListData = () => {
               flexDirection: 'row',
             }}>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>handleSave(index)}>
                 <Image
-                  source={require('../../assets/icons/save.png')}
+                  source={isSaved? require('../../assets/icons/saved.png'): require('../../assets/icons/save.png')}
                   style={{
                     width: 15,
                     height: 15,
@@ -190,7 +194,7 @@ const HomeListData = () => {
         <View style={{flexDirection: 'row', marginBottom:'2%'}}>
           <TouchableOpacity style={{marginRight: '10%'}} onPress={() => handleLike(index)}>
             <Image
-              source={!isLiked ? require('../../assets/icons/like.png') : require('../../assets/icons/liked.png')}
+              source={isLiked ? require('../../assets/icons/liked.png') : require('../../assets/icons/like.png')}
               style={styles.likeImage}
             />
           </TouchableOpacity>
@@ -235,7 +239,7 @@ const HomeListData = () => {
         <CommentModal
           isVisible={isCommentModal}
           onClose={closeModal}
-          onSubmit={submitComment}
+        //  onSubmit={submitComment}
           selectedPost={postComment}
         />
       )}

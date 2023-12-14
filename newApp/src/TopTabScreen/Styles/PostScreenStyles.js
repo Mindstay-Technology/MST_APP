@@ -117,6 +117,12 @@ export default StyleSheet.create({
         borderRadius:10,
         marginBottom:'3%'
       },
+      modeTrainingText:{
+        color: '#333333',
+        fontSize: 14,
+        fontWeight: '500',
+        marginBottom:'2%',
+      },
       experienceText:{
         color: '#333333',
         fontSize: 14,
@@ -240,17 +246,19 @@ export default StyleSheet.create({
 
       },
       startDateView:{
-        marginRight:'30%'
+        marginRight:'20%'
       },
       startDate:{
         color: '#333333',
         fontSize: 14,
         fontWeight: '500',
+        marginBottom:'5%'
       },
       endDate:{
         color: '#333333',
         fontSize: 14,
         fontWeight: '500',
+        marginBottom:'4%'
       },
 
       checkBoxText:{
@@ -262,7 +270,8 @@ export default StyleSheet.create({
       },
       buttonsView:{
         flexDirection:'row',
-        justifyContent:'flex-start'
+        justifyContent:'flex-start',
+        marginBottom:'5%'
       },
       resetButton:{
         width:'45%',
@@ -294,5 +303,29 @@ export default StyleSheet.create({
         fontSize:16,
         fontWeight:'500',
         alignSelf:'center'
+      },
+
+      //-------------------------Styles for Post Job----------------------------------------
+      
+      postJobContainer:{
+        flex:1, backgroundColor:'#ffffff',
+      },
+      jobTitleText: {
+        color: '#333333',
+        fontSize: 14,
+        fontWeight: '500',
+        marginBottom:'2%'
+      },
+      jobTitleInput: {
+        height: 40,
+        width: '95%',
+        borderWidth: 1.3,
+       borderColor: '#E3E3E3',
+        borderRadius: 10,
+        // padding: 0,
+        color: '#888888',
+        paddingLeft: 15,
+        backgroundColor: '#ffffff',
+        marginBottom: '3%',
       },
 })

@@ -1,8 +1,9 @@
 import { View, Text,ScrollView, Image, TextInput, TouchableOpacity} from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles/MyProgramStyles'
-import {MyProgramData} from '../../constants/Constants'
-import FlatListData from './FlatListData'
+import {OnGoingProData, PreviousProgramData} from '../../constants/Constants'
+import OnGoingProgram from './OnGoingProgram';
+import PreviousProgram from './PreviousProgram'
 
 const MyProgramScreen = () => {
   const [searchText, setSearchText] =useState('');
@@ -19,6 +20,7 @@ const MyProgramScreen = () => {
               height: 20,
               alignSelf: 'center',
               marginRight: '2%',
+              resizeMode:'contain'
             }}
           />
           <TextInput
@@ -26,7 +28,7 @@ const MyProgramScreen = () => {
             value={searchText}
             onChangeText={text => setSearchText(text)}
             placeholder="what are you looking for?"
-            placeholderTextColor="black"
+            placeholderTextColor="#8D8D8D"
           />
         </View>
         <TouchableOpacity>
@@ -35,10 +37,15 @@ const MyProgramScreen = () => {
       </View>
 
       <ScrollView style={{ marginTop:'5%'}}>
-        <Text style={styles.headTextStyle}>On Going Program</Text>
+        <Text style={styles.onGoingText}>On Going Program</Text>
 
         <View>
-          <FlatListData data ={MyProgramData}/>
+          <OnGoingProgram data ={OnGoingProData}/>
+        </View>
+
+        <Text style={styles.previousProText}>Previous Training Program</Text>
+        <View>
+          <PreviousProgram data ={PreviousProgramData}/>
         </View>
       </ScrollView>
     </View>

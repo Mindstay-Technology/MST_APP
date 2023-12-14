@@ -15,14 +15,14 @@ const PostTabs = ({navigation}) => {
       <View style={styles.headerView}>
         <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
           <Image
-            source={require('../../assets/icons/goback.png')}
+            source={require('../assets/icons/goback.png')}
             style={{width: 15, height: 15, resizeMode: 'contain'}}
           />
         </TouchableOpacity>
 
         <View style={styles.searchView}>
           <Image
-            source={require('../../assets/icons/magnify.png')}
+            source={require('../assets/icons/magnify.png')}
             style={{
               width: 20,
               height: 20,
@@ -41,14 +41,14 @@ const PostTabs = ({navigation}) => {
         </View>
         <TouchableOpacity>
           <Image
-            source={require('../../assets/icons/bell.png')}
+            source={require('../assets/icons/bell.png')}
             style={{width: 20, height: 20, resizeMode: 'contain'}}
           />
         </TouchableOpacity>
       </View>
 
       <Tab.Navigator
-        initialRouteName="PostTrainingScreen"
+        initialRouteName="PostJobScreen"
         screenOptions={{
           
           tabBarShowLabel: true,

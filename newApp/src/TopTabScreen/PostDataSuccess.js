@@ -18,7 +18,7 @@ export const SubmitSuccess = () => {
         <View>
           <View style={{marginTop: '3%', marginBottom: '3%'}}>
             <Image
-              source={require('../../assets/images/connect_circle.png')}
+              source={require('../assets/images/connect_circle.png')}
               style={{
                 width: 75,
                 height: 75,
@@ -27,7 +27,7 @@ export const SubmitSuccess = () => {
               }}
             />
             <Image
-              source={require('../../assets/images/connect.png')}
+              source={require('../assets/images/connect.png')}
               style={{
                 alignSelf: 'center',
                 position: 'absolute',

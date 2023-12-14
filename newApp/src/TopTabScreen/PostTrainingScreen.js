@@ -16,7 +16,7 @@ import {
   DurationTrainingOptions,
   ModeTrainingOptions,
   TOC
-} from '../../constants/Constants';
+} from '../constants/Constants';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -25,25 +25,28 @@ import RadioForm, {
 import Slider from '@react-native-community/slider';
 import CheckBox from '@react-native-community/checkbox';
 import { SubmitSuccess } from './PostDataSuccess';
+import DatePicker from '../Components/DatePicker';
 
-const PostTrainingScreen = () => {
+const PostTrainingScreen = ({navigation}) => {
   const [companyName, setCompanyName] = useState('');
   const [companyError, setCompanyError] = useState('');
   const [currentTech, setCurrentTech] = useState(null);
   const [isOpenTech, setIsOpenTech] = useState(false);
   const [techError, setTechError] = useState('');
-  const [typeTraining, setTypeTraining] = useState(0);
+  const [radioType, setRadioType] = useState(0);
   const [participantSelected, setParticipantSelected] = useState(false);
-  const [durationTraining, setDurationTraining] = useState(0);
-  const [modeTraining, setModeTraining] = useState(0);
+  const [radioDuration, setRadioDuration] = useState(0);
+  const [radioMode, setRadioMode] = useState(0);
   const [incDecParticipant, setIncDecParticipant] = useState(0);
   const [sliderValue, setSliderValue] = useState(0); // Initial value
   const [isCurrency, setIsCurrency] = useState();
   const [minInput, setMinInput] = useState('');
   const [maxInput, setMaxInput] = useState('');
-  const [isTOC, setIsTOC] = useState(0);
+  const [radioTOC, setRadioTOC] = useState(0);
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  const [submitPost, setSubmitPost] = useState(false)
+  const [submitPost, setSubmitPost] = useState(false);
+  const [resetPost, setResetPost] = useState(false);
+
 
   const [customStyle, setCustomStyle] = useState([
     {
@@ -63,28 +66,32 @@ const PostTrainingScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      setTypeTraining(0);
-    }, []),
+      setRadioType(null);
+      setRadioDuration(null);
+      setRadioMode(null);
+      setRadioTOC(null)
+    },[]),
   );
+  
 
   //-----------------Radio options------------------------
 
   const handleTypeTraining = (value) => {
-    setTypeTraining(value);
+    setRadioType(value);
     setParticipantSelected(true);
   };
 
   const handleDurationTraining = value => {
-    setDurationTraining(value);
+    setRadioDuration(value);
     //   setParticipantSelected(true)
   };
   const handleModeTraining = (value) => {
-    setModeTraining(value);
+    setRadioMode(value);
     //   setParticipantSelected(true)
   };
 
   const handleTOC = (value) =>{
-    setIsTOC(value);
+    setRadioTOC(value);
   }
   //------------------Down Picker---------------------------
   const handleTechTextChange = (val) => {
@@ -206,7 +213,7 @@ const PostTrainingScreen = () => {
                 <RadioButtonInput
                   obj={{label: option.label, value: index}}
                   index={index}
-                  isSelected={typeTraining === index}
+                  isSelected={radioType === index}
                   onPress={() => handleTypeTraining(index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
@@ -231,7 +238,7 @@ const PostTrainingScreen = () => {
           </RadioForm>
         </View>
         {participantSelected && (
-          <View>
+          <View style={{marginBottom:'3%'}}>
             <Text style={styles.participantsText}>Total Participants</Text>
             <View style={styles.totalParticipantsView}>
               <TouchableOpacity onPress={() => handleDecParticipant()}>
@@ -245,6 +252,7 @@ const PostTrainingScreen = () => {
           </View>
         )}
 
+        <Text style={styles.modeTrainingText}>Mode Of training</Text>
         <View style={styles.radioFormView}>
           <RadioForm formHorizontal={true} animation={true}>
             {ModeTrainingOptions.map((option, index) => (
@@ -253,7 +261,7 @@ const PostTrainingScreen = () => {
                 <RadioButtonInput
                   obj={{label: option.label, value: index}}
                   index={index}
-                  isSelected={modeTraining === index}
+                  isSelected={radioMode === index}
                   onPress={() => handleModeTraining(index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
@@ -304,7 +312,7 @@ const PostTrainingScreen = () => {
                 <RadioButtonInput
                   obj={{label: option.label, value: index}}
                   index={index}
-                  isSelected={durationTraining === index}
+                  isSelected={radioDuration === index}
                   onPress={() => handleDurationTraining(index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
@@ -406,7 +414,7 @@ const PostTrainingScreen = () => {
                 <RadioButtonInput
                   obj={{label: option.label, value: index}}
                   index={index}
-                  isSelected={isTOC === index}
+                  isSelected={radioTOC === index}
                   onPress={() => handleTOC(index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
@@ -436,17 +444,19 @@ const PostTrainingScreen = () => {
         <View style={styles.startEndDateView}>
                     <View style={styles.startDateView}>
                       <Text style={styles.startDate}>Start Date</Text>
+                      <DatePicker/>
                     </View>
 
                     <View>
                       <Text style={styles.endDate}>End Date</Text>
+                      <DatePicker/>
                     </View>
         </View>
 
         <View style={{flexDirection:'row', marginBottom:'3%'}}>
           <CheckBox
             value={toggleCheckBox}
-            onValueChange={newValue => handleCheckbox()}
+            onValueChange={() => handleCheckbox()}
            tintColors={{true: '#2676C2', false: '#EAEAEA'}}
             onFillColor='red'
             onCheckColor='red'

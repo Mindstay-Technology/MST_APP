@@ -5,14 +5,16 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from '../../style/styles';
 import {TListData} from '../../constants/Constants';
 import StarRating from 'react-native-star-rating';
 import TrainerCardData from './TrainerCardData';
-import FilterModal from './FilterModal'
-import DetailsModal from './DetailsModal';
+import FilterModal from './Modals/FilterModal'
+import DetailsModal from './Modals/DetailsModal';
+import SwipeOutCard from './DeleteTListData';
 
 const TrainerListData = () => {
   const [data, setData] = useState(TListData);
@@ -59,8 +61,6 @@ const TrainerListData = () => {
   };
 
   //-------------------- trainer details Modal-------------
-
-
   const handleTrainerData = (item, index) => {
     setSelectedTrainer({ item, index });
     setIsTrainerDetailsVisible(true);
@@ -70,7 +70,6 @@ const TrainerListData = () => {
     setIsTrainerDetailsVisible(false);
     setSelectedTrainer(null);
   };
-
 //------------------------------------------------------------------------------------
   const renderTListData = ({item, index}) => {
     return (
@@ -166,14 +165,15 @@ const TrainerListData = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginHorizontal: '5%',
-          marginTop: '8%',
+          marginTop: '6%',
+          paddingBottom:'2%'
         }}>
-        <Text style={styles.tListHeadText}>Based on your profile</Text>
+        <Text style={styles.tListHeadText}>Most Demand Trainers</Text>
 
         <TouchableOpacity onPress={() => handleFilter()}>
           <Image
             source={require('../../assets/icons/list_group.png')}
-            style={{width: 20, height: 20}}
+            style={{width: 20, height: 20, resizeMode:'contain'}}
           />
         </TouchableOpacity>
       </View>
@@ -193,9 +193,8 @@ const TrainerListData = () => {
           selectedTrainer={selectedTrainer}
         />
       )}
-
+        <ScrollView>
       <TrainerCardData />
-
       <View style={styles.tListViewContainer}>
         <View>
           <FlatList
@@ -210,6 +209,7 @@ const TrainerListData = () => {
           />
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

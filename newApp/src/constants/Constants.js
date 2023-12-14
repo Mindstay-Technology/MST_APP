@@ -280,7 +280,7 @@ export const TListData = [
 
 ];
 
-export const MyProgramData = [
+export const OnGoingProData = [
   {
     id:'1',
     postedDate:'02/11/2023',
@@ -295,6 +295,23 @@ export const MyProgramData = [
     mode:'Offline',
     location:'Bangalore',
 
-  },
-  
+  },  
+];
+
+export const PreviousProgramData = [
+  {
+    id:'1',
+    postedDate:'02/11/2023',
+    lastUpdated:'01/11/2023',
+    programName:'Full Stack Developer',
+    subjects:'Java,  Js, Python, React Native, c sharp, j query, API Design',
+    typeOfTraining:'Corporate',
+    startDate:'01-12-2023',
+    endDate:'01-102024',
+    trainingDuration: '10',
+    totalParticipants: '205',
+    mode:'Offline',
+    location:'Bangalore',
+
+  },  
 ]

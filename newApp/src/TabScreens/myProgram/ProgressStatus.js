@@ -125,7 +125,7 @@ const ProgressStatus = () => {
                   React developer
                 </Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Text style={styles.trainerYearstyle}>10+ years</Text>
+                  <Text style={styles.trainerYearStyle}>10+ years</Text>
                 </View>
               </View>
             </View>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: '2%',
   },
-  trainerYearstyle: {
+  trainerYearStyle: {
     color: '#2676C2',
     fontSize: 10,
     fontWeight: '400',

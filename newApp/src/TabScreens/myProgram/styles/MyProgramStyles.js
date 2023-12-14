@@ -18,12 +18,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#EEEEEE',
     borderRadius: 10,
     paddingHorizontal: 10,
     marginHorizontal: '1%',
     width: '70%',
-    opacity: 0.4,
     backgroundColor: '#ffffff',
   },
   searchIconStyle: {
@@ -36,7 +35,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
   },
-  headTextStyle: {
+  onGoingText: {
     color: '#888888',
     fontSize: 14,
     fontWeight: '500',
@@ -70,7 +69,6 @@ export default StyleSheet.create({
     color: '#535353',
     fontSize: 12,
     fontWeight: '400',
-    marginBottom: '3%',
   },
   programNameStyle1: {
     color: '#333333',
@@ -210,5 +208,145 @@ marginRight:'5%'
     backgroundColor:'#EEEEEE',
     alignSelf:'center',
     marginBottom:'2%'
-  }
+  },
+
+  //----------------------------------Styles for Previous Training program--------------------
+  previousProText:{
+    color: '#888888',
+    fontSize: 14,
+    fontWeight: '500',
+    marginLeft: '3%',
+    marginTop:'3%'
+  },
+
+  //---------------------------Styles for Menu Modal--------------------
+  menuModalContainer: {
+    backgroundColor: '#ffffff', //FDFEFE
+    height: '20%',
+    width: '100%',
+    top: '80%',
+    opacity: 1,
+    borderColor: '#1111111A',
+    borderWidth: 0.5,
+  },
+
+  menuCloseButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#ffff',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '85%',
+    borderColor: '#1111111A',
+    borderWidth: 1,
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 20},
+    shadowOpacity: 2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  menuCloseImageStyle: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginTop: '27%',
+  },
+  menuTextView:{
+    
+    paddingTop:'12%',
+    justifyContent:'center',    
+
+  },
+  menuModalText:{
+    color:'#535353',
+    fontSize:16,
+    fontWeight:'500',
+    justifyContent:'center',    
+    marginLeft:'5%',
+    marginTop:'3%'    
+  },
+  menuModalLine:{
+    width:'100%',
+    height:1,
+    backgroundColor:'#D9D9D9'
+  },
+//-------------------------Styles for Delete Modal-------------
+
+delModalContainer: {
+  backgroundColor: '#ffffff', //FDFEFE
+  height: '20%',
+  width: '100%',
+  top: '80%',
+  opacity: 1,
+  borderColor: '#1111111A',
+  borderWidth: 0.5,
+},
+
+delCloseButton: {
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  backgroundColor: '#ffff',
+  position: 'absolute',
+  alignSelf: 'center',
+  bottom: '85%',
+  borderColor: '#1111111A',
+  borderWidth: 1,
+  shadowColor: 'black',
+  shadowOffset: {width: 0, height: 20},
+  shadowOpacity: 2,
+  shadowRadius: 4,
+  elevation: 5,
+},
+delCloseImageStyle: {
+  width: 20,
+  height: 20,
+  resizeMode: 'contain',
+  alignSelf: 'center',
+  marginTop: '27%',
+},
+delSureText:{
+  color:'#535353',
+  fontSize:15,
+  fontWeight:'500',
+  alignSelf:'center',
+  marginTop:'7%',
+  marginBottom:'3%'
+},
+delButtonsView:{
+  flexDirection:'row',
+  justifyContent:'space-around',
+},
+delResetButton:{
+  width:'40%',
+  height:50,
+  backgroundColor:'#ffffff',
+  borderColor:'#2676C2',
+  borderWidth:1,
+  borderRadius:10,
+  justifyContent:'center',
+},
+delResetText:{
+  color:'#2676C2',
+  fontSize:16,
+  fontWeight:'500',
+  alignSelf:'center'
+},
+delSubmitButton:{
+  width:'40%',
+  height:50,
+  backgroundColor:'#2676C2',
+  borderColor:'#2676C2',
+  borderWidth:1,
+  borderRadius:10,
+  justifyContent:'center'
+},
+delSubmitText:{
+  color:'#ffffff',
+  fontSize:16,
+  fontWeight:'500',
+  alignSelf:'center'
+},
 });

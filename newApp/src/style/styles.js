@@ -611,6 +611,7 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: '5%',
+    paddingBottom:'3%'
   },
   searchView: {
     flexDirection: 'row',
@@ -636,7 +637,7 @@ export default StyleSheet.create({
   },
 
   scrollViewContainer: {
-    marginTop: '7%',
+    marginTop: '4%',
     //justifyContent:'flex-start',
     alignItems: 'flex-start',
   },
@@ -749,7 +750,7 @@ resizeMode:'contain'
     flexDirection: 'row',
     justifyContent: 'flex-start',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#8D8D8D',
     borderRadius: 10,
     paddingHorizontal: 10,
     marginHorizontal: '1%',
@@ -768,14 +769,14 @@ resizeMode:'contain'
   },
 
   tListViewContainer: {
-    marginTop: '7%',
+    marginTop: '3%',
     //justifyContent:'flex-start',
     //  alignItems: 'flex-start',
   },
   tListHeadText: {
-    color: 'black',
+    color: '#888888',
     fontSize: 14,
-    fontWeight: '400',
+    fontWeight: '500',
     marginLeft: '3%',
   },
 

@@ -3,16 +3,32 @@ import React, {useState} from 'react';
 import styles from './styles/MyProgramStyles';
 //import OrderStatusAnimation from './orderStatus';
 import ProgressStatus from './ProgressStatus';
+import MenuModal from './MenuModal';
 
-const FlatListData = ({data}) => {
+const OnGoingProgram = ({data}) => {
   const [programData, setProgramData] = useState(data);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState();
 
   const toggleTextExpansion = () => {
     setIsExpanded(!isExpanded);
   };
   const displayedDescription = item =>
     isExpanded ? item.subjects : `${item.subjects.slice(0, 50)}...`;
+
+//------------menu----------------
+const openMenuModal = (item, index) => {
+  setShowMenu(true);
+  setSelectedProgram({item, index})
+  
+};
+
+const closeMenuModal = () => {
+  setShowMenu(false);
+};
+
+//---------------------------------------------------------
 
   const renderProgramData = ({item, index}) => {
     return (
@@ -23,7 +39,7 @@ const FlatListData = ({data}) => {
 
           <Text style={styles.programNameStyle1}>Training Program Name</Text>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>openMenuModal(item, index)}>
               <Image
                 source={require('../../assets/icons/menu.png')}
                 style={{
@@ -37,6 +53,15 @@ const FlatListData = ({data}) => {
               />
             </TouchableOpacity>
           </View>
+
+          {showMenu &&
+        <MenuModal
+          isMenuVisible={showMenu}
+          onCloseMenu={closeMenuModal}
+          selectedProgram = {selectedProgram}
+        
+        />}
+
           <Text style={styles.programNameStyle2}>{item.programName}</Text>
 
           <Text style={styles.subjectsStyle1}>Training Topics & Subjects</Text>
@@ -114,4 +139,4 @@ const FlatListData = ({data}) => {
   );
 };
 
-export default FlatListData;
+export default OnGoingProgram;

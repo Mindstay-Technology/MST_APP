@@ -15,6 +15,7 @@ import TrainerScreen from '../Screens/TrainerScreen';
 import ExistingUserSuccess from '../Screens/ExistingUserSuccess';
 import newUserSuccess from '../Screens/newUserSuccess';
 import MyTabs from './TabNavigation';
+import PostTabs from '../TopTabScreen/PostTabs'
 
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +38,7 @@ const Navigation = () => {
         <Stack.Screen name="EmployerScreen" component={EmployerScreen} />
         <Stack.Screen name="TrainerScreen" component={TrainerScreen} />
         <Stack.Screen name="MyTabs" component={MyTabs} />
-        <Tab.Screen name="PostTabs" component={PostTabs} />
+        <Stack.Screen name="PostTabs" component={PostTabs} />
       </Stack.Navigator> */}
       <MyTabs/>
       

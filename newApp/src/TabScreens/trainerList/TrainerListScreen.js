@@ -26,6 +26,7 @@ const TrainerListScreen = () => {
               height: 20,
               alignSelf: 'center',
               marginRight: '2%',
+              resizeMode:'contain'
             }}
           />
 
@@ -34,7 +35,7 @@ const TrainerListScreen = () => {
             value={searchText}
             onChangeText={text => setSearchText(text)}
             placeholder="what are you looking for?"
-            placeholderTextColor="black"
+            placeholderTextColor="#8D8D8D"
           />
         </View>
         <TouchableOpacity>

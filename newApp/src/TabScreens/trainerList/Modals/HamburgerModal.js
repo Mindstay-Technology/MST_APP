@@ -1,24 +1,30 @@
 import {View, Text, Modal, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
-import styles from './Styles/TrainerListStyle';
+import styles from '../Styles/TrainerListStyle';
 import { ConnectModal } from './SuccessModals';
 
 const HamburgerModal = ({isVisible, onClose}) => {
 
 
-  const [connectSuccess, setConnectSuccess] = useState(false);
+  const [isConnectModal, setIsConnectModal] = useState(false);
 
 
   //------------------open connect success message---------------
-  const ShowConnectModal = () => {
-   // onClose();
-   setConnectSuccess(true);
-    setTimeout(() => {
-      setConnectSuccess(false);
-      onClose();
-    }, 2000);
+  
 
+  const OpenConnectModal = (item, index) => {
+  
+   setIsConnectModal(true);
+   onClose();
+    setTimeout(() => {
+      setIsConnectModal(false);
+      
+    }, 2000);
   };
+
+  // const CloseConnectModal = () => {
+  //   setIsConnectModal(false);
+  // };
 
 
   return (
@@ -31,13 +37,13 @@ const HamburgerModal = ({isVisible, onClose}) => {
         <View style={styles.hamburgerModalContent}>
           <TouchableOpacity onPress={onClose} style={styles.hamburgerCloseButton}>
             <Image
-              source={require('../../assets/icons/close.png')}
+              source={require('../../../assets/icons/close.png')}
               style={styles.hamburgerCloseImageStyle}
             />
           </TouchableOpacity>
 
           <View style={styles.hamburgerTextView}>
-            <TouchableOpacity style={{height: 50, backgroundColor: 'white'}} onPress={()=>{ShowConnectModal()}}>
+            <TouchableOpacity style={{height: 50, backgroundColor: 'white'}} onPress={()=>{OpenConnectModal()}}>
               <Text style={styles.hamburgerModalText}>Connect</Text>
             </TouchableOpacity>            
             <View style={styles.hamburgerModalLine} />
@@ -53,9 +59,16 @@ const HamburgerModal = ({isVisible, onClose}) => {
           </View>
         </View>
 
-        {connectSuccess && ( 
+        {/* {connectSuccess && ( 
             <ConnectModal/>
-          )}
+          )} */}
+
+          {isConnectModal &&
+        <ConnectModal
+          visibleConnectModal={isConnectModal}
+       //   closeConnectModal={CloseConnectModal}
+        
+        />}
 
       </Modal>
     </View>

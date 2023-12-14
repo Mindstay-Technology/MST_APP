@@ -29,7 +29,7 @@ const HomeScreen = ({navigation}) => {
             value={searchText}
             onChangeText={text => setSearchText(text)}
             placeholder="what are you looking for?"
-            placeholderTextColor="black"
+            placeholderTextColor="#8D8D8D"
           />
         </View>
         <TouchableOpacity>

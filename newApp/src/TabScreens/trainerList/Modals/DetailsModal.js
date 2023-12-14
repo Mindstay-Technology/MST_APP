@@ -11,7 +11,7 @@ import {
   FlatList
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
-import styles from './Styles/TrainerListStyle';
+import styles from '../Styles/TrainerListStyle';
 //import {TListData} from '../../constants/Constants'
 import HamburgerModal from './HamburgerModal'
 import {HireNowModal} from './SuccessModals';
@@ -29,6 +29,7 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
 //------------------------Hamburger Modal------
   const showHamburgerModal = (item, index) => {
     setIsModalVisible(true);
+    
   };
 
   const closeHamburgerModal = () => {
@@ -97,10 +98,10 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
                 justifyContent: 'center',
               }}>
               <TouchableOpacity 
-               onPress={()=>showHamburgerModal({item, index})}
+               onPress={()=>showHamburgerModal(item, index)}
               >
                 <Image
-                  source={require('../../assets/icons/menu.png')}
+                  source={require('../../../assets/icons/menu.png')}
                   style={{width: 15, height: 15, resizeMode: 'contain'}}
                 />
               </TouchableOpacity>

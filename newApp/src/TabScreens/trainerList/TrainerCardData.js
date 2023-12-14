@@ -4,7 +4,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import styles from '../../style/styles';
 import StarRating from 'react-native-star-rating';
 import { TListData } from '../../constants/Constants';
-import DetailsModal from './DetailsModal';
+import DetailsModal from './Modals/DetailsModal';
 
 
 const TrainerCardData = () => {
@@ -119,7 +119,7 @@ const TrainerCardData = () => {
   return (
     <View
       style={{
-        marginTop: '5%',
+        marginTop: '2%',
         width: '100%',
         height: 250,
        // borderWidth: 1,
@@ -143,24 +143,26 @@ const TrainerCardData = () => {
         loop={true}
         autoplay={true}
         autoplayInterval={interval}
-        paginationStyle={{ marginBottom: '10%' }}
+       // paginationStyle={{ marginBottom: '10%', backgroundColor:'red' }}
       
       />
       <Pagination
         dotsLength={showCardData.length}
         activeDotIndex={activeSlide}
-        containerStyle={{marginTop: -25, color:'red'}}
+        containerStyle={{marginBottom: "-7%",}}
+        dotColor='#3C84C9'
         dotStyle={{
-          width: 12,
-          height: 12,
-          borderRadius: 6,
-          marginHorizontal: 8,
-          backgroundColor: 'rgba(0, 0, 0, 0.92)',
-          
+          width: 8,
+          height: 8,
+          borderRadius: 4,
+          marginHorizontal: 3,          
           
         }}
+        activeDotStyle={{width:15, height:4, borderRadius: 4,}}
         inactiveDotOpacity={0.4}
         inactiveDotScale={1}
+        activeDotColor='#3C84C9'
+        inactiveDotColor='#2676C266'
       />
      
     </View>
