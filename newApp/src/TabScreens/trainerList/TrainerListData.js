@@ -6,17 +6,22 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
+import { Swipeable } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import styles from '../../style/styles';
 import {TListData} from '../../constants/Constants';
 import StarRating from 'react-native-star-rating';
 import TrainerCardData from './TrainerCardData';
 import FilterModal from './Modals/FilterModal'
-import DetailsModal from './Modals/DetailsModal';
-import SwipeOutCard from './DeleteTListData';
+import { useNavigation } from '@react-navigation/native';
 
 const TrainerListData = () => {
+
+  const navigation = useNavigation();
   const [data, setData] = useState(TListData);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -48,9 +53,6 @@ const TrainerListData = () => {
 
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [isTrainerDetailsVisible, setIsTrainerDetailsVisible] = useState(false);
-  const [filterData, setFilterData] = useState(false);
-  const [selectedTrainer, setSelectedTrainer] = useState();
 
   const handleFilter = (item, index) => {
     setModalVisible(true);
@@ -60,19 +62,33 @@ const TrainerListData = () => {
     setModalVisible(false);
   };
 
-  //-------------------- trainer details Modal-------------
+  //-------------------- trainer details Screen-------------
   const handleTrainerData = (item, index) => {
-    setSelectedTrainer({ item, index });
-    setIsTrainerDetailsVisible(true);
+   navigation.navigate('DetailScreen', {item, index});
   };
 
-  const closeDetailModal = () => {
-    setIsTrainerDetailsVisible(false);
-    setSelectedTrainer(null);
+  //----------------Swipe Right---------------------------
+
+  const handleRemoveTrainer = (item, index) => {
+    // Filter out the item with the specified itemId
+    const updatedData = data.filter((item) => item.id !== index);
+   // console.log(index, item.id, "lama", updatedData, 'kama')
+    setData(updatedData);
   };
-//------------------------------------------------------------------------------------
+
+  const rightSwipe = (item, index)=>{
+    return (
+      <View style={{backgroundColor:'#ffffff', height:50, alignSelf:'center', }}>
+          <TouchableOpacity style={{width:100, height:50, backgroundColor:'red', alignItems:'center',  justifyContent:'center', }} onPress={()=>handleRemoveTrainer(item, index)}>
+          <Text style={{color:'#ffffff', fontSize:16, fontWeight:'600'}}>Remove</Text>
+          </TouchableOpacity>
+      </View>
+    )
+  }
+  //------------------------------------------------------------------------------------
   const renderTListData = ({item, index}) => {
     return (
+      <Swipeable renderRightActions={()=>rightSwipe(item, index)}>
       <TouchableOpacity 
       onPress={() => handleTrainerData(item, index)}
       >
@@ -83,8 +99,8 @@ const TrainerListData = () => {
               source={item.image}
               style={{
                 width: 90,
-                height: 130,
-                borderRadius: 30,
+                height: 110,
+                borderRadius: 10,
               }}
             />
           </View>
@@ -104,18 +120,18 @@ const TrainerListData = () => {
                 emptyStarColor="gray"
               />
 
-              <View style={{flexDirection: 'row', marginTop: '5%'}}>
+              <View style={{flexDirection: 'row', marginTop: '3%'}}>
                 <Image
                   source={item.skills.python}
-                  style={{width: 25, height: 25, marginRight: '3%'}}
+                  style={{width: 20, height: 20, marginRight: '3%', resizeMode:'contain'}}
                 />
                 <Image
                   source={item.skills.java}
-                  style={{width: 25, height: 25, marginRight: '3%'}}
+                  style={{width: 20, height: 20, marginRight: '3%', resizeMode:'contain'}}
                 />
                 <Image
                   source={item.skills.react}
-                  style={{width: 25, height: 25}}
+                  style={{width: 20, height: 20, resizeMode:'contain'}}
                 />
               </View>
             </View>
@@ -125,7 +141,7 @@ const TrainerListData = () => {
         <View style={styles.tListLocationView}>
           <Image
             source={require('../../assets/icons/location.png')}
-            style={{width: 15, height: 15, marginRight: '10%'}}
+            style={{width: 15, height: 15, marginRight: '10%', resizeMode:'contain'}}
           />
           <Text style={styles.tListLocationText}>{item.location}</Text>
         </View>
@@ -142,6 +158,7 @@ const TrainerListData = () => {
         </View>
       </View>
       </TouchableOpacity>
+      </Swipeable>
     );
   };
 
@@ -159,6 +176,7 @@ const TrainerListData = () => {
 
 
   return (
+    <GestureHandlerRootView>
     <View>
       <View
         style={{
@@ -186,13 +204,13 @@ const TrainerListData = () => {
           //selectedPost={selectedPost}
         />}
 
-    {selectedTrainer && (
+    {/* {selectedTrainer && (
         <DetailsModal
           isVisible={isTrainerDetailsVisible}
           onClose={closeDetailModal}
           selectedTrainer={selectedTrainer}
         />
-      )}
+      )} */}
         <ScrollView>
       <TrainerCardData />
       <View style={styles.tListViewContainer}>
@@ -211,6 +229,7 @@ const TrainerListData = () => {
       </View>
       </ScrollView>
     </View>
+    </GestureHandlerRootView>
   );
 };
 

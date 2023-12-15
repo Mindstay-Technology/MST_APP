@@ -82,15 +82,39 @@ export default StyleSheet.create({
   },
 
   //---------------------------------Styles for Details Modal---------------
-  detailsModalContent: {
-    backgroundColor: '#ffffff', //FDFEFE
-    height: '92%',
-    width: '100%',
-    top: '9%',
-    opacity: 1,
-    borderColor: '#1111111A',
-    borderWidth: 0.5,
+  detailContainer:{
+    flex:1,
+    backgroundColor:'#ffffff'
   },
+  detailHeaderView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: '5%',
+    marginBottom:'3%'
+  },
+  detailSearchView: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    borderWidth: 1,
+    borderColor: '#8D8D8D',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginHorizontal: '1%',
+    width: '70%',
+    opacity: 0.4,
+    backgroundColor: '#ffffff',
+  },
+  detailSearchIconStyle: {
+    
+  },
+  detailSearchInput: {
+    height: 40,
+    color: 'black',
+    fontSize: 12,
+    fontWeight: '400',
+  },
+
   bannerImageStyle: {
     width: '101%',
     height: 100,
@@ -106,29 +130,30 @@ export default StyleSheet.create({
     // borderWidth: 1,
     // borderColor: 'red',
     width: '90%',
-    height: 130,
+    height: 140,
   },
-  imageStyle: {
-    width: 90,
-    height: 120,
-    resizeMode: 'contain',
-    borderRadius: 20,
+  detailProfile: {
+    width:90,
+    height:110,
     marginTop: '1%',
+    borderRadius:10
   },
-  designationStyle: {
-    color: '#6A6A6A',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-  columnData: {
+    columnData: {
     flexDirection: 'column',
-    justifyContent: 'space-around',
+   // justifyContent: 'space-around',
     marginLeft: '5%',
   },
-  nameStyle: {
+  nameText: {
     color: '#2676C2',
     fontSize: 18,
     fontWeight: '500',
+    marginBottom:'2%'
+  },
+  designationText: {
+    color: '#6A6A6A',
+    fontSize: 12,
+    fontWeight: '400',
+    marginBottom:'2%'
   },
   dateView: {
     backgroundColor: '#00CF7F',
@@ -136,6 +161,7 @@ export default StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:'5%'
   },
   availText: {
     color: '#ffffff',
@@ -200,17 +226,48 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
   },
-  certContentText: {
+  topCertContentText: {
     color: '#535353',
     fontSize: 12,
     fontWeight: '400',
     width: '90%',
-    height: 120,
     alignSelf: 'center',
     marginBottom: '2%',
     lineHeight: 18,
     // textAlign: 'justify',
     //textAlignVertical: 'center',
+  },
+  readMoreStyle: {    
+   // flexDirection:'row',
+    width:'90%'
+  },
+  certContentText: {
+    color: '#535353',
+    fontSize: 12,
+    fontWeight: '400',
+    width: '90%',
+    alignSelf: 'center',
+    marginBottom: '2%',
+    lineHeight: 18,
+    // textAlign: 'justify',
+    //textAlignVertical: 'center',
+  },
+  readMoreLink: {
+    color: '#2676C2',
+    fontSize: 12,
+    fontWeight: '400',
+    position: 'absolute',
+    left: '5%',
+    bottom: '5%',
+  },
+  certContentText1:{
+    color: '#535353',
+    fontSize: 12,
+    fontWeight: '400',
+    width: '90%',
+    alignSelf: 'center',
+    marginBottom: '5%',
+    lineHeight: 18,
   },
   certImage: {
     width: 160,
@@ -225,6 +282,7 @@ export default StyleSheet.create({
     color: '#535353',
     marginLeft: '5%',
     marginBottom: '2%',
+    marginTop:'5%'
   },
   lineContainer: {
     flexDirection: 'row',

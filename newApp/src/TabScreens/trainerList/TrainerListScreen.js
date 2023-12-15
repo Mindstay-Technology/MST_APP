@@ -45,26 +45,6 @@ const TrainerListScreen = () => {
           />
         </TouchableOpacity>
       </View>
-
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: '5%',
-          marginTop: '8%',
-        }}>
-        <Text style={styles.tListHeadText}>Based on your profile</Text>
-
-        <TouchableOpacity>
-          <Image
-            source={require('../../assets/icons/list_group.png')}
-            style={{width: 20, height: 20}}
-          />
-        </TouchableOpacity>
-      </View> */}
-
-      {/* <TrainerCardData /> */}
-
       <TrainerListData />
     </View>
   );

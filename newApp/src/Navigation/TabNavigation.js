@@ -6,6 +6,7 @@ import {Image, View, Text} from 'react-native';
 import TrainerListScreen from '../TabScreens/trainerList/TrainerListScreen';
 import PostTabs from '../TopTabScreen/PostTabs';
 
+
 const CommonTabOptions = {
   headerShown: false,
   tabBarItemStyle: {
@@ -23,7 +24,7 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="MyProgram"
+      initialRouteName="PostTabs"
       screenOptions={{
         tabBarShowLabel: true,
         tabBarStyle: {

@@ -40,12 +40,12 @@ const MyProgramScreen = () => {
         <Text style={styles.onGoingText}>On Going Program</Text>
 
         <View>
-          <OnGoingProgram data ={OnGoingProData}/>
+          <OnGoingProgram myData ={OnGoingProData}/>
         </View>
 
         <Text style={styles.previousProText}>Previous Training Program</Text>
         <View>
-          <PreviousProgram data ={PreviousProgramData}/>
+          <PreviousProgram myData ={PreviousProgramData}/>
         </View>
       </ScrollView>
     </View>

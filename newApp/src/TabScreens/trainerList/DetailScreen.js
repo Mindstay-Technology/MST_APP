@@ -1,6 +1,6 @@
 // CommentModal.js
 
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   Modal,
   View,
@@ -8,32 +8,45 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  FlatList
+  FlatList,
+  TextInput
 } from 'react-native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
-import styles from '../Styles/TrainerListStyle';
+import styles from './Styles/TrainerListStyle';
 //import {TListData} from '../../constants/Constants'
-import HamburgerModal from './HamburgerModal'
-import {HireNowModal} from './SuccessModals';
+import HamburgerModal from './Modals/HamburgerModal'
+import {HireNowModal} from './Modals/SuccessModals';
 
-const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
+const DetailScreen = ({ route}) => {
 
-  const item = selectedTrainer.item;
-  const index = selectedTrainer.index;
+  const navigation = useNavigation();
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { item, index } = route.params;
+
+  const [searchText, setSearchText] = useState('');
+  const [showHamburgerModal, setShowHamburgerModal] = useState(false);
+  const [selectedTrainer, setSelectedTrainer] = useState();
   const [buttonText, setButtonText] = useState('Hire Now');
   const [hireNowSuccess, setHireNowSuccess] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      setIsExpanded(false)
+    },[]),
+  );
 
 
 //------------------------Hamburger Modal------
-  const showHamburgerModal = (item, index) => {
-    setIsModalVisible(true);
+  const openHamburgerModal = (item, index) => {
+    setSelectedTrainer({item, index})
+    setShowHamburgerModal(true);
     
   };
 
   const closeHamburgerModal = () => {
-    setIsModalVisible(false);
+    setShowHamburgerModal(false);
   };
 
   //-------------------hire now success message---------------
@@ -47,22 +60,69 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
     }, 3000);
   };
 
- 
+  //---------------Go back-----------------
+
+  const goToTrainerList=()=>{
+    navigation.navigate('TrainerListScreen');
+  }
+  //---------------Text Expansion-----------
+
+  const toggleTextExpansion = () => {
+    setIsExpanded(!isExpanded);
+  };
+  const displayedContent = (item) =>
+    isExpanded ? item.certification.content : `${item.certification.content.slice(0, 110)}...`;
+ //---------------------------------------------------------------------------
   return (
-    <View style={{flex: 1, height: '100%'}}>
-      <Modal
-        isVisible={isVisible}
-        onRequestClose={onClose}
-        animationType="slide"
-        transparent={true}>
-        <View style={styles.detailsModalContent}>
+    <View style={styles.detailContainer}>
+      
+      <View style={styles.detailHeaderView}>
+
+      <TouchableOpacity onPress={()=>goToTrainerList()}>
+        <Image source={require('../../assets/icons/goback.png')} style={{
+              width: 15,
+              height: 15,
+              alignSelf: 'center',
+              marginRight: '2%',
+              resizeMode:'contain'
+            }}/>
+            </TouchableOpacity>
+
+        <View style={styles.detailSearchView}>
+          <Image
+            source={require('../../assets/icons/magnify.png')}
+            style={{
+              width: 20,
+              height: 20,
+              alignSelf: 'center',
+              marginRight: '2%',
+              resizeMode:'contain'
+            }}
+          />
+
+          <TextInput
+            style={styles.detailSearchInput}
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+            placeholder="what are you looking for?"
+            placeholderTextColor="#8D8D8D"
+          />
+        </View>
+        <TouchableOpacity>
+          <Image
+            source={require('../../assets/icons/bell.png')}
+            style={{width: 20, height: 20, resizeMode:'contain'}}
+          />
+        </TouchableOpacity>
+      </View>
         
         <ScrollView>
 
-        {isModalVisible &&
+        {showHamburgerModal &&
         <HamburgerModal
-          isVisible={isModalVisible}
-          onClose={closeHamburgerModal}
+          isHamburgerVisible={showHamburgerModal}
+          onCloseHamburger={closeHamburgerModal}
+          selectedTrainer = {selectedTrainer}
         
         />}
 
@@ -72,10 +132,10 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
           />
 
           <View style={styles.rowDataStyle}>
-            <Image source={item.image} style={styles.imageStyle} />
+            <Image source={item.image} style={styles.detailProfile} />
             <View style={styles.columnData}>
-              <Text style={styles.nameStyle}>{item.name}</Text>
-              <Text style={styles.designationStyle}>{item.designation}</Text>
+              <Text style={styles.nameText}>{item.name}</Text>
+              <Text style={styles.designationText}>{item.designation}</Text>
               <StarRating
                 disabled={true}
                 maxStars={5}
@@ -98,10 +158,10 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
                 justifyContent: 'center',
               }}>
               <TouchableOpacity 
-               onPress={()=>showHamburgerModal(item, index)}
+               onPress={()=>openHamburgerModal(item, index)}
               >
                 <Image
-                  source={require('../../../assets/icons/menu.png')}
+                  source={require('../../assets/icons/menu.png')}
                   style={{width: 15, height: 15, resizeMode: 'contain'}}
                 />
               </TouchableOpacity>
@@ -122,7 +182,7 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
                 <Text style={styles.certOrganizaTionText}>{item.certification.organization}</Text>
                 </View>
 
-                <Text style={styles.certContentText}>{item.certification.content}</Text>
+                <Text style={styles.topCertContentText}>{item.certification.content}</Text>
         
                 <Image
             source={item.certification.certificate}
@@ -130,10 +190,19 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
           />
 
                 <View style={{flexDirection:'row',}}>
-                <Text style={{color:'#535353', fontSize:12, fontWeight:'500' ,     marginLeft:'5%', marginBottom:'2%'}}>Certified development:</Text>
+                <Text style={{color:'#535353', fontSize:12, fontWeight:'500' ,     marginLeft:'5%', marginBottom:'2%', marginRight:'1%'}}>Certified development:</Text>
                 <Text style={{color:'#2676C2', fontSize:12, fontWeight:'500'}}>{item.certification.organization}</Text>
                 </View>
-                <Text style={styles.certContentText}>{item.certification.content}</Text>
+                {/* <Text style={styles.certContentText}>{item.certification.content}</Text> */}
+
+            <Text style={isExpanded ? styles.certContentText : styles. certContentText1} >
+              {displayedContent(item)}
+            </Text>
+            {!isExpanded && (
+              <TouchableOpacity onPress={toggleTextExpansion}>
+                <Text style={styles.readMoreLink}>More</Text>
+              </TouchableOpacity>
+            )}
 
                 <Text style={styles.skillsHeadText}>Skills</Text>
                   
@@ -163,11 +232,10 @@ const DetailsModal = ({isVisible, onClose, selectedTrainer}) => {
             <HireNowModal/>
           )}
           
-        </View>
-      </Modal>
+
     </View>
   );
 };
 
 
-export default DetailsModal;
+export default DetailScreen;

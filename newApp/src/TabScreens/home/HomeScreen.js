@@ -1,8 +1,9 @@
 import {View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import styles from '../../style/styles';
+import styles from './styles/HomeStyles';
 //import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeListData from './HomeListData';
+import {HomeData} from '../../constants/Constants';
 
 const HomeScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
@@ -37,11 +38,11 @@ const HomeScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      <HomeListData/>
+      <HomeListData myData = {HomeData}/>
       
-      <View style={{width:50, height:50, borderRadius:25, backgroundColor:'#2676C2', position:'absolute', justifyContent:'center', top:'90%', left:'82%'}}>
+      <View style={styles.plusButton}>
           <TouchableOpacity onPress={()=>navigation.navigate('PostTabs')}>
-            <Text style={{color:'#ffffff', textAlign:'center', fontSize:16, fontWeight:'600'}}>+</Text>
+            <Text style={styles.plusText}>+</Text>
           </TouchableOpacity>
         </View>
     </View>

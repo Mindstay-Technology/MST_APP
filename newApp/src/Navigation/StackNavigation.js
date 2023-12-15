@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+//import { BackHandler } from 'react-native';
+
 //import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
@@ -16,16 +18,18 @@ import ExistingUserSuccess from '../Screens/ExistingUserSuccess';
 import newUserSuccess from '../Screens/newUserSuccess';
 import MyTabs from './TabNavigation';
 import PostTabs from '../TopTabScreen/PostTabs'
+import DetailScreen from '../TabScreens/trainerList/DetailScreen';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  
+
+
   return (
     <NavigationContainer>
       
-      {/* <Stack.Navigator
-        initialRouteName="Splash1"
+      <Stack.Navigator
+        initialRouteName="MyTabs"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash1" component={SplashScreen1} />
         <Stack.Screen name="Splash2" component={SplashScreen2} />
@@ -38,9 +42,10 @@ const Navigation = () => {
         <Stack.Screen name="EmployerScreen" component={EmployerScreen} />
         <Stack.Screen name="TrainerScreen" component={TrainerScreen} />
         <Stack.Screen name="MyTabs" component={MyTabs} />
+        <Stack.Screen name="DetailScreen" component={DetailScreen}/>
         <Stack.Screen name="PostTabs" component={PostTabs} />
-      </Stack.Navigator> */}
-      <MyTabs/>
+      </Stack.Navigator>
+      {/* <MyTabs/> */}
       
     </NavigationContainer>
   );

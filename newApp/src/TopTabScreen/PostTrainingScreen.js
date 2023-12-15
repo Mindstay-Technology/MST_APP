@@ -26,6 +26,8 @@ import Slider from '@react-native-community/slider';
 import CheckBox from '@react-native-community/checkbox';
 import { SubmitSuccess } from './PostDataSuccess';
 import DatePicker from '../Components/DatePicker';
+import SearchLocationData from '../constants/Constants'
+import SearchLocation from './SearchLocation';
 
 const PostTrainingScreen = ({navigation}) => {
   const [companyName, setCompanyName] = useState('');
@@ -34,9 +36,10 @@ const PostTrainingScreen = ({navigation}) => {
   const [isOpenTech, setIsOpenTech] = useState(false);
   const [techError, setTechError] = useState('');
   const [radioType, setRadioType] = useState(0);
-  const [participantSelected, setParticipantSelected] = useState(false);
+  const [typeSelected, setTypeSelected] = useState(false);
   const [radioDuration, setRadioDuration] = useState(0);
   const [radioMode, setRadioMode] = useState(0);
+  const [modeSelected, setModeSelected] = useState(false);
   const [incDecParticipant, setIncDecParticipant] = useState(0);
   const [sliderValue, setSliderValue] = useState(0); // Initial value
   const [isCurrency, setIsCurrency] = useState();
@@ -78,7 +81,7 @@ const PostTrainingScreen = ({navigation}) => {
 
   const handleTypeTraining = (value) => {
     setRadioType(value);
-    setParticipantSelected(true);
+    setTypeSelected(true);
   };
 
   const handleDurationTraining = value => {
@@ -87,6 +90,7 @@ const PostTrainingScreen = ({navigation}) => {
   };
   const handleModeTraining = (value) => {
     setRadioMode(value);
+    setModeSelected(true);
     //   setParticipantSelected(true)
   };
 
@@ -237,7 +241,7 @@ const PostTrainingScreen = ({navigation}) => {
             ))}
           </RadioForm>
         </View>
-        {participantSelected && (
+        {typeSelected && (
           <View style={{marginBottom:'3%'}}>
             <Text style={styles.participantsText}>Total Participants</Text>
             <View style={styles.totalParticipantsView}>
@@ -286,7 +290,13 @@ const PostTrainingScreen = ({navigation}) => {
             ))}
           </RadioForm>
         </View>
-
+                  {
+                    modeSelected && (
+                      <View>
+                          <SearchLocation locationData={SearchLocationData}/>
+                      </View>
+                    )
+                  }
         <Text style={styles.experienceText}>Experience</Text>
         <Text style={styles.dragExpText}>Drag to select a experience</Text>
         <Slider

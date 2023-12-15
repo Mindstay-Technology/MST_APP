@@ -4,13 +4,15 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import styles from '../../style/styles';
 import StarRating from 'react-native-star-rating';
 import { TListData } from '../../constants/Constants';
-import DetailsModal from './Modals/DetailsModal';
+import DetailsModal from './DetailScreen';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const TrainerCardData = () => {
 
-  const [selectedTrainer, setSelectedTrainer] = useState();
-  const [isTrainerDetailsVisible, setIsTrainerDetailsVisible] = useState(false);
+  const navigation = useNavigation();
+
 
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -34,17 +36,11 @@ const TrainerCardData = () => {
     return () => clearInterval(intervalId);
   }, [showCardData, interval]);
 
-  //-----------------Trainer Details modal----
+  //-----------------Trainer Details Screen----
 
   const handleTrainerData = (item, index) => {
-    setSelectedTrainer({ item, index });
-    setIsTrainerDetailsVisible(true);
-  };
-
-  const closeDetailModal = () => {
-    setIsTrainerDetailsVisible(false);
-    setSelectedTrainer(null);
-  };
+    navigation.navigate('DetailScreen', {item, index});
+   };
 
   const renderItem = ({item}) => {
     return (
@@ -56,8 +52,12 @@ const TrainerCardData = () => {
               source={item.image}
               style={{
                 width: 90,
-                height: 130,
-                borderRadius: 30,
+                height: 110,
+                borderRadius: 10,
+                marginBottom:'10%',
+                marginTop:'15%',
+               // resizeMode:'contain'              
+
               }}
             />
             <View style={styles.cardLocationView}>
@@ -84,23 +84,23 @@ const TrainerCardData = () => {
                 emptyStarColor="gray"
               />
 
-              <View style={{flexDirection: 'row', marginTop: '5%'}}>
+              <View style={{flexDirection: 'row', marginTop: '3%', resizeMode:'contain'}}>
                 <Image
                   source={item.skills.python}
-                  style={{width: 25, height: 25, marginRight: '3%'}}
+                  style={{width: 20, height: 20, marginRight: '3%', resizeMode:'contain'}}
                 />
                 <Image
                   source={item.skills.java}
-                  style={{width: 25, height: 25, marginRight: '3%'}}
+                  style={{width: 20, height: 20, marginRight: '3%', resizeMode:'contain'}}
                 />
                 <Image
                   source={item.skills.react}
-                  style={{width: 25, height: 25}}
+                  style={{width: 20, height: 20, resizeMode:'contain'}}
                 />
               </View>
             </View>
           </View>
-                <View style={{width:1, height:'121%', borderWidth:1, borderColor:'#EEEEEE', marginRight:'7%'}}></View>
+                <View style={{width:1, height:'121%', borderWidth:1, borderColor:'#EEEEEE', marginRight:'7%',}}></View>
           <View style={styles.cardDateView}>
             <Text style={styles.cardAvailDateText}>Avail On</Text>
             <Text style={styles.cardDateText}>{item.date}</Text>
@@ -126,13 +126,6 @@ const TrainerCardData = () => {
         //borderColor: 'green',
       }}>
 
-{selectedTrainer && (
-        <DetailsModal
-          isVisible={isTrainerDetailsVisible}
-          onClose={closeDetailModal}
-          selectedTrainer={selectedTrainer}
-        />
-      )}
       <Carousel
         data={showCardData}
         renderItem={renderItem}

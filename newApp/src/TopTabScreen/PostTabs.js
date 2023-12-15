@@ -48,7 +48,7 @@ const PostTabs = ({navigation}) => {
       </View>
 
       <Tab.Navigator
-        initialRouteName="PostJobScreen"
+        initialRouteName="PostTrainingScreen"
         screenOptions={{
           
           tabBarShowLabel: true,

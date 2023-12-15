@@ -1,13 +1,11 @@
 import {View, Text, FlatList, TouchableOpacity, Image, Modal, Animated, ScrollView} from 'react-native';
 import React, {useState, useEffect,} from 'react';
-import {HomeData} from '../../constants/Constants';
-import styles from '../../style/styles';
+import styles from './styles/HomeStyles';
 import CommentModal from './CommentModal'
-import Icon from 'react-native-vector-icons/Entypo'
 
-const HomeListData = () => {
+const HomeListData = ({myData}) => {
   
-  const [data, setData] = useState(HomeData);
+  const [data, setData] = useState(myData);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [likedPost, setLikedPost] =useState([]);
   const [savedPost, setSavedPost] = useState([]);  
@@ -106,7 +104,7 @@ const HomeListData = () => {
     setIsCommentModal(true);
   };
 
-  const closeModal = () => {
+  const closeCommentModal = () => {
     setIsCommentModal(false);
     setPostComment(null);
   };
@@ -237,8 +235,8 @@ const HomeListData = () => {
         <Text style={styles.homeHeadText}>Based on your profile</Text>
         {postComment && (
         <CommentModal
-          isVisible={isCommentModal}
-          onClose={closeModal}
+          isCommentModalVisible={isCommentModal}
+          onCloseComment={closeCommentModal}
         //  onSubmit={submitComment}
           selectedPost={postComment}
         />

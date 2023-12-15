@@ -3,39 +3,40 @@ import React, {useState} from 'react';
 import styles from '../Styles/TrainerListStyle';
 import { ConnectModal } from './SuccessModals';
 
-const HamburgerModal = ({isVisible, onClose}) => {
+const HamburgerModal = ({isHamburgerVisible, onCloseHamburger, selectedTrainer}) => {
+
+const item = selectedTrainer.item;
+const index = selectedTrainer.index;
+
+const [showConnectModal, setShowConnectModal] = useState(false);
 
 
-  const [isConnectModal, setIsConnectModal] = useState(false);
 
+  //------------------open connect success message---------------  
 
-  //------------------open connect success message---------------
+  const OpenConnectModal = () => {
   
-
-  const OpenConnectModal = (item, index) => {
-  
-   setIsConnectModal(true);
-   onClose();
+  //  onCloseHamburger();
+    setShowConnectModal(true);
     setTimeout(() => {
-      setIsConnectModal(false);
+      setShowConnectModal(false);
       
     }, 2000);
   };
-
-  // const CloseConnectModal = () => {
-  //   setIsConnectModal(false);
-  // };
-
+  
+  const CloseConnectModal = ()=>{
+    setShowConnectModal(false);
+  }
 
   return (
     <View>
       <Modal
-        isVisible={isVisible}
-        onRequestClose={onClose}
+        isVisible={isHamburgerVisible}
+        onRequestClose={onCloseHamburger}
         animationType="slide"
         transparent={true}>
         <View style={styles.hamburgerModalContent}>
-          <TouchableOpacity onPress={onClose} style={styles.hamburgerCloseButton}>
+          <TouchableOpacity onPress={onCloseHamburger} style={styles.hamburgerCloseButton}>
             <Image
               source={require('../../../assets/icons/close.png')}
               style={styles.hamburgerCloseImageStyle}
@@ -59,14 +60,12 @@ const HamburgerModal = ({isVisible, onClose}) => {
           </View>
         </View>
 
-        {/* {connectSuccess && ( 
-            <ConnectModal/>
-          )} */}
+        
 
-          {isConnectModal &&
+          {showConnectModal &&
         <ConnectModal
-          visibleConnectModal={isConnectModal}
-       //   closeConnectModal={CloseConnectModal}
+          IsConnectModalVisible={showConnectModal}
+          onCloseConnectModal={CloseConnectModal}
         
         />}
 

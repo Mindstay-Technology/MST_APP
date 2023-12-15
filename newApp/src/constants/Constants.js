@@ -44,9 +44,9 @@ export const TOC = [
 ]
 export const HomeData = [
   {
-    id:1,
-    image: require('../assets/images/profile.png'),
-    name: 'Abdul',
+    id:'0',
+    image: require('../assets/images/profile1.png'),
+    name: 'Peter',
     skill: 'UI UX Designer',
     description:
       'I just willing to transfer my knowledge to Juniors are willing ping me for more details',
@@ -55,9 +55,9 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:2,
-    image: require('../assets/images/profile.png'),
-    name: 'Abdul',
+    id:'1',
+    image: require('../assets/images/profile2.png'),
+    name: 'Patrick',
     skill: 'UI UX Designer',
     description:
       'I just willing to transfer my knowledge to Juniors are willing ping me for more details',
@@ -66,9 +66,9 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:3,
-    image: require('../assets/images/profile.png'),
-    name: 'Abdul',
+    id:'2',
+    image: require('../assets/images/profile3.png'),
+    name: 'Cummins',
     skill: 'UI UX Designer',
     description:
       'I just willing to transfer my knowledge to Juniors are willing ping me for more details',
@@ -77,9 +77,9 @@ export const HomeData = [
     available: 'December 10 2023',
   },
   {
-    id:4,
+    id:'3',
     image: require('../assets/images/profile.png'),
-    name: 'Abdul',
+    name: 'Clark',
     skill: 'UI UX Designer',
     description:
       'I just willing to transfer my knowledge to Juniors are willing ping me for more details',
@@ -91,8 +91,9 @@ export const HomeData = [
 
 export const TListData = [
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Abdul',
+    id: '0',
+    image: require('../assets/images/profile1.png'),
+    name: 'Kowshik',
     location: 'Bangalore',
     designation: 'Frontend Developer',
     yoe: 10,
@@ -122,8 +123,9 @@ export const TListData = [
     },
   },
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Vishwa',
+    id:'1',
+    image: require('../assets/images/profile2.png'),
+    name: 'Joe',
     location: 'Chennai',
     designation: 'Backend Developer',
     yoe: 10,
@@ -153,8 +155,9 @@ export const TListData = [
     },
   },
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Prashant',
+    id:'2',
+    image: require('../assets/images/profile3.png'),
+    name: 'Wood',
     location: 'Chennai',
     designation: 'UI UX Designer',
     yoe: 10,
@@ -184,8 +187,9 @@ export const TListData = [
     },
   },
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Swamy',
+    id:'3',
+    image: require('../assets/images/profile4.png'),
+    name: 'Melinda',
     location: 'Bangalore',
     designation: 'Backend Designer',
     yoe: 10,
@@ -216,8 +220,9 @@ export const TListData = [
   },
 
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Manoj',
+    id:'4',
+    image: require('../assets/images/profile1.png'),
+    name: 'peter',
     location: 'Bangalore',
     designation: 'UI UX Designer',
     yoe: 10,
@@ -247,8 +252,9 @@ export const TListData = [
     },
   },
   {
-    image: require('../assets/images/profile.png'),
-    name: 'Sai',
+    id:'5',
+    image: require('../assets/images/profile2.png'),
+    name: 'Virat',
     location: 'Bangalore',
     designation: 'UI UX Designer',
     yoe: 10,
@@ -300,6 +306,21 @@ export const OnGoingProData = [
 
 export const PreviousProgramData = [
   {
+    id:'0',
+    postedDate:'02/11/2023',
+    lastUpdated:'01/11/2023',
+    programName:'Full Stack Developer',
+    subjects:'Java,  Js, Python, React Native, c sharp, j query, API Design',
+    typeOfTraining:'Corporate',
+    startDate:'01-12-2023',
+    endDate:'01-102024',
+    trainingDuration: '10',
+    totalParticipants: '205',
+    mode:'Offline',
+    location:'Bangalore',
+
+  },
+  {
     id:'1',
     postedDate:'02/11/2023',
     lastUpdated:'01/11/2023',
@@ -314,4 +335,11 @@ export const PreviousProgramData = [
     location:'Bangalore',
 
   },  
+];
+
+export const SearchLocationData = [
+  { id: '0', name: 'Bangalore' },
+  { id: '1', name: 'Chennai' },
+  { id: '2', name: 'Hyderabad' },
+  // Add more locations as needed
 ]

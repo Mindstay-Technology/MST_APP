@@ -598,141 +598,8 @@ export default StyleSheet.create({
 
   //----------------------------------------Styles for Tab Screens----------------------------
 
-  //------------------------------Styles for HomeScreen and HomelistData-------------------------------------
 
-  HomeScreenContainer: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    // alignItems:'center',
-    backgroundColor: '#ffffff',
-  },
-  headerView: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: '5%',
-    paddingBottom:'3%'
-  },
-  searchView: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    borderWidth: 1,
-    borderColor: '#EEEEEE',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginHorizontal: '1%',
-    width: '70%',
-  //  opacity: 0.4,
-    backgroundColor: '#ffffff',
-  },
-  searchIconStyle: {
-    alignSelf: 'center',
-    marginRight: '2%',
-  },
-  searchInput: {
-    height: 40,
-    color: '#8D8D8D',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-
-  scrollViewContainer: {
-    marginTop: '4%',
-    //justifyContent:'flex-start',
-    alignItems: 'flex-start',
-  },
-
-  homeHeadText: {
-    color: 'black',
-    fontSize: 14,
-    fontWeight: '400',
-    marginLeft: '3%',
-  },
-  flatListHomeData: {
-    justifyContent: 'center',
-    marginTop: '5%',
-    marginLeft: '3%',
-    marginRight: '5%',
-    backgroundColor: '#ffffff',
-  },
-
-  homeRowView: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginBottom: '3%',
-  },
-  nameDesignationView: {
-    alignSelf: 'center',
-  },
-  homeName: {
-    color: '#535353',
-    fontSize: 18,
-    fontWeight: '500',
-    marginBottom: '2%',
-  },
-
-  homeDesignationStyle: {
-    color: '#888888',
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  homeDescStyle: {
-    color: '#888888',
-    fontSize: 12,
-    fontWeight: '400',
-    lineHeight: 18,
-    width: '80%',
-    marginBottom: '3%',
-  },
-  homeSalaryRangeStyle: {
-    color: '#535353',
-    fontSize: 14,
-    fontWeight: '500',
-    marginBottom: '3%',
-  },
-  homeModeStyleView: {
-    flexDirection: 'row',
-    marginBottom: '3%',
-  },
-  homeModeStyle: {
-    color: '#888888',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-  homeModeStyle1: {
-    color: '#535353',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-  homeAvailableStyleView: {
-    flexDirection: 'row',
-    marginBottom: '5%',
-  },
-  homeAvailableStyle: {
-    color: '#888888',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-  homeAvailableStyle1: {
-    color: '#535353',
-    fontSize: 12,
-    fontWeight: '400',
-  },
-  likeText: {
-    position: 'absolute',
-    fontSize: 24,
-    color: 'blue',
-    fontWeight:'bold'
-  },
-  homeSeparatorStyle: {
-    height: 2,
-    backgroundColor: 'black',
-  },
-  likeImage:{
-width:20,
-height:20,
-resizeMode:'contain'
-  },
+  
   //----------------Styles for TrainerList ---------------------------
   tListContainer: {
     flex: 1,
@@ -758,9 +625,7 @@ resizeMode:'contain'
     opacity: 0.4,
     backgroundColor: '#ffffff',
   },
-  tListSearchIconStyle: {
-    
-  },
+  tListSearchIconStyle: {},
   tListSearchInput: {
     height: 40,
     color: 'black',
@@ -781,7 +646,7 @@ resizeMode:'contain'
   },
 
   flatListTListData: {
-   // flex:1,
+    // flex:1,
     justifyContent: 'center',
     marginLeft: '5%',
     backgroundColor: '#ffffff',
@@ -818,7 +683,7 @@ resizeMode:'contain'
     fontWeight: '400',
   },
   tListColumnView: {
-    marginTop: '2%',
+    marginTop: '1%',
     marginLeft: '3%',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -827,28 +692,28 @@ resizeMode:'contain'
     color: '#3C84C9',
     fontSize: 16,
     fontWeight: '500',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
   tListDesignation: {
     color: '#6A6A6A',
     fontSize: 12,
     fontWeight: '400',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
   tListYoe: {
     color: '#3C84C9',
     fontSize: 12,
     fontWeight: '400',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
   tListDateView: {
     backgroundColor: '#00CF7F',
     width: '30%',
-    height: 50,
+    height: 40,
     borderTopRightRadius: 8,
     position: 'absolute',
     left: '70%',
-    bottom: '75%',
+    bottom: '80%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -893,7 +758,7 @@ resizeMode:'contain'
   },
   cardRowData: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+  //  justifyContent: 'flex-start',
     marginLeft: '5%',
   },
   cardLocationView: {
@@ -909,35 +774,35 @@ resizeMode:'contain'
     fontWeight: '400',
   },
   cardColumnView: {
-    marginTop: '2%',
-    marginLeft: '1%',
+  //  marginLeft: '1%',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     marginRight: '5%',
+    marginTop: '4%',
   },
   cardName: {
     color: '#3C84C9',
     fontSize: 16,
     fontWeight: '500',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
   cardDesignation: {
     color: '#6A6A6A',
     fontSize: 12,
     fontWeight: '400',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
   cardYoe: {
     color: '#3C84C9',
     fontSize: 12,
     fontWeight: '400',
-    marginBottom: '7%',
+    marginBottom: '3%',
   },
 
   cardDateView: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '5%',
+    marginTop: '2%',
   },
 
   cardAvailDateText: {
@@ -952,7 +817,7 @@ resizeMode:'contain'
     fontWeight: '600',
     alignSelf: 'center',
   },
-  cardSessionStyle:{
+  cardSessionStyle: {
     backgroundColor: '#3C84C9',
     width: '100%',
     height: 30,
@@ -963,12 +828,12 @@ resizeMode:'contain'
     top: '85%',
     left: '0%',
   },
-  cardSessionText:{
-    color:'#ffffff',
-    fontSize:12,
-    fontWeight:'400',
-    marginLeft:'8%',
-    textAlign:'center',
-    marginTop:'1%'
-  }
+  cardSessionText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '400',
+    marginLeft: '8%',
+    textAlign: 'center',
+    marginTop: '1%',
+  },
 });

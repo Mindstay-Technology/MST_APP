@@ -3,16 +3,20 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles/MyProgramStyles'
 
-const DeleteModal = ({isDelVisible, onCloseDelModal, delSelectedProg}) => {
+const DeleteModal = ({isDelVisible, onCloseDelModal, deleteProgram}) => {
     const navigation = useNavigation();
-    const item = delSelectedProg.item;
-    const index = delSelectedProg.index;
+   // const item = delSelectedProg.item;
+ //   const index = delSelectedProg.index;
+
+    //---------------Delete-------------
 
 
-    //---------------Cancel--------------
+
+//---------------Cancel--------------
 const cancelDelProgram =()=>{
     onCloseDelModal();
 }
+
 
   return (
     <View>
@@ -35,7 +39,7 @@ const cancelDelProgram =()=>{
 
           <View style={styles.delButtonsView}>
             <View style={styles.delResetButton}>
-              <TouchableOpacity onPress={()=>{delProgram()}}>
+              <TouchableOpacity onPress={deleteProgram}>
                 <Text style={styles.delResetText}>Delete</Text>
               </TouchableOpacity>
             </View>

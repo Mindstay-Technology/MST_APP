@@ -1,26 +1,34 @@
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import styles from './styles/MyProgramStyles';
 //import OrderStatusAnimation from './orderStatus';
 import ProgressStatus from './ProgressStatus';
 import MenuModal from './MenuModal';
 
-const OnGoingProgram = ({data}) => {
-  const [programData, setProgramData] = useState(data);
+const OnGoingProgram = ({myData}) => {
+
+    const [programData, setProgramData] = useState(myData);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState();
+  const [selectedProgram, setSelectedProgram] = useState(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      setIsExpanded(false)
+    },[]),
+  );
 
   const toggleTextExpansion = () => {
     setIsExpanded(!isExpanded);
   };
-  const displayedDescription = item =>
+  const displayedTopics = item =>
     isExpanded ? item.subjects : `${item.subjects.slice(0, 50)}...`;
 
 //------------menu----------------
-const openMenuModal = (item, index) => {
+const openMenuModal = (index) => {
   setShowMenu(true);
-  setSelectedProgram({item, index})
+  setSelectedProgram(index)
   
 };
 
@@ -28,6 +36,14 @@ const closeMenuModal = () => {
   setShowMenu(false);
 };
 
+//------------------------delete program-------------
+const handleDeleteProgram = (index) => {
+  // Filter out the item with the specified id
+  const updatedData = programData.filter((item) => item.id !== index);
+ // console.log(index, 'mmmmmm', updatedData)
+  setProgramData(updatedData);
+  setShowMenu(false); // Close the modal after deletion
+};
 //---------------------------------------------------------
 
   const renderProgramData = ({item, index}) => {
@@ -39,7 +55,7 @@ const closeMenuModal = () => {
 
           <Text style={styles.programNameStyle1}>Training Program Name</Text>
           <View>
-            <TouchableOpacity onPress={()=>openMenuModal(item, index)}>
+            <TouchableOpacity onPress={()=>openMenuModal(index)}>
               <Image
                 source={require('../../assets/icons/menu.png')}
                 style={{
@@ -59,7 +75,7 @@ const closeMenuModal = () => {
           isMenuVisible={showMenu}
           onCloseMenu={closeMenuModal}
           selectedProgram = {selectedProgram}
-        
+          deleteProgram={() => handleDeleteProgram(selectedProgram)}        
         />}
 
           <Text style={styles.programNameStyle2}>{item.programName}</Text>
@@ -67,8 +83,8 @@ const closeMenuModal = () => {
           <Text style={styles.subjectsStyle1}>Training Topics & Subjects</Text>
 
           <View style={styles.readMoreStyle}>
-            <Text style={styles.subjectsStyle2} numberOfLines={3}>
-              {displayedDescription(item)}
+            <Text style={styles.subjectsStyle2} numberOfLines={5}>
+              {displayedTopics(item)}
             </Text>
             {!isExpanded && (
               <TouchableOpacity onPress={toggleTextExpansion}>

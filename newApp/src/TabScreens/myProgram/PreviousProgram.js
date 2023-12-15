@@ -3,10 +3,13 @@ import React, {useState} from 'react';
 import styles from './styles/MyProgramStyles';
 //import OrderStatusAnimation from './orderStatus';
 import ProgressStatus from './ProgressStatus';
+import MenuModal from './MenuModal';
 
-const PreviousProgram = ({data}) => {
-  const [programData, setProgramData] = useState(data);
+const PreviousProgram = ({myData}) => {
+  const [programData, setProgramData] = useState(myData);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
 
   const toggleTextExpansion = () => {
     setIsExpanded(!isExpanded);
@@ -14,6 +17,27 @@ const PreviousProgram = ({data}) => {
   const displayedDescription = item =>
     isExpanded ? item.subjects : `${item.subjects.slice(0, 50)}...`;
 
+
+//------------menu----------------
+const openMenuModal = (index) => {
+  setShowMenu(true);
+  setSelectedProgram(index)
+  
+};
+
+const closeMenuModal = () => {
+  setShowMenu(false);
+};
+
+//------------------------delete program-------------
+const handleDeleteProgram = (index) => {
+  // Filter out the item with the specified id
+  const updatedData = programData.filter((item) => item.id !== index);
+ // console.log(index, 'jjjjjj', updatedData)
+  setProgramData(updatedData);
+  setShowMenu(false); // Close the modal after deletion
+};
+//---------------------------------------------------------
   const renderProgramData = ({item, index}) => {
     return (
       <View style={styles.flatListOuterView}>
@@ -32,7 +56,7 @@ const PreviousProgram = ({data}) => {
 
           <Text style={styles.programNameStyle1}>Training Program Name</Text>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>openMenuModal(index)}>
               <Image
                 source={require('../../assets/icons/menu.png')}
                 style={{
@@ -46,6 +70,14 @@ const PreviousProgram = ({data}) => {
               />
             </TouchableOpacity>
           </View>
+
+          {showMenu &&
+        <MenuModal
+          isMenuVisible={showMenu}
+          onCloseMenu={closeMenuModal}
+          selectedProgram = {selectedProgram}
+          deleteProgram={() => handleDeleteProgram(selectedProgram)}        
+        />}
           <Text style={styles.programNameStyle2}>{item.programName}</Text>
 
           <Text style={styles.subjectsStyle1}>Training Topics & Subjects</Text>

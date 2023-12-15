@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import DeleteModal from './DeleteModal';
 
 
-const MenuModal = ({isMenuVisible, onCloseMenu, selectedProgram}) => {
+const MenuModal = ({isMenuVisible, onCloseMenu, selectedProgram, deleteProgram}) => {
     const navigation = useNavigation();
     const item = selectedProgram.item;
     const index = selectedProgram.index;
@@ -63,7 +63,8 @@ const closeDelModal = () => {
                 <DeleteModal
                     isDelVisible = {showDelModal}
                     onCloseDelModal = {closeDelModal}
-                    delSelectedProg = {delSelectedProg}
+                    deleteProgram = {deleteProgram}
+
                 />
             )
           }
