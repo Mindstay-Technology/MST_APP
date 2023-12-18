@@ -4,10 +4,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
-import styles from './Styles/PostScreenStyles';
+import styles from '../Styles/PostScreenStyles';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
   Skills,
@@ -15,8 +16,9 @@ import {
   TypeTrainingOptions,
   DurationTrainingOptions,
   ModeTrainingOptions,
-  TOC
-} from '../constants/Constants';
+  TOC,
+  Locations,
+} from '../../constants/Constants';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -24,10 +26,10 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 import Slider from '@react-native-community/slider';
 import CheckBox from '@react-native-community/checkbox';
-import { SubmitSuccess } from './PostDataSuccess';
-import DatePicker from '../Components/DatePicker';
-import SearchLocationData from '../constants/Constants'
+import {SubmitSuccess} from '../PostDataSuccess';
+import DatePicker from '../../Components/DatePicker';
 import SearchLocation from './SearchLocation';
+import MyBudget from './MyBudget';
 
 const PostTrainingScreen = ({navigation}) => {
   const [companyName, setCompanyName] = useState('');
@@ -35,21 +37,34 @@ const PostTrainingScreen = ({navigation}) => {
   const [currentTech, setCurrentTech] = useState(null);
   const [isOpenTech, setIsOpenTech] = useState(false);
   const [techError, setTechError] = useState('');
+
   const [radioType, setRadioType] = useState(0);
-  const [typeSelected, setTypeSelected] = useState(false);
-  const [radioDuration, setRadioDuration] = useState(0);
+  const [isTypeSelected, setIsTypeSelected] = useState(false);
+  const [participantValue, setParticipantValue] = useState(0);
+
   const [radioMode, setRadioMode] = useState(0);
-  const [modeSelected, setModeSelected] = useState(false);
-  const [incDecParticipant, setIncDecParticipant] = useState(0);
+  const [isModeSelected, setIsModeSelected] = useState(false);
+
+  const [radioDuration, setRadioDuration] = useState(0);
+  const [isDurationSelected, setIsDurationSelected] = useState(false);
+  const [durationLabel, setDurationLabel] = useState('Hrs');
+  const [durationValue, setDurationValue] = useState(0);
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
+
   const [sliderValue, setSliderValue] = useState(0); // Initial value
-  const [isCurrency, setIsCurrency] = useState();
-  const [minInput, setMinInput] = useState('');
-  const [maxInput, setMaxInput] = useState('');
+
+  const [isCurrencySelected, setIsCurrencySelected] = useState(false);
+
   const [radioTOC, setRadioTOC] = useState(0);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+  const [isTocSelected, setIsTocSelected] = useState(false);
+
+  const [uploadFileName, setUploadFileName] = useState('');
+  const [isClickedUpload, setIsClickedUpload] = useState(false);
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   const [submitPost, setSubmitPost] = useState(false);
   const [resetPost, setResetPost] = useState(false);
-
 
   const [customStyle, setCustomStyle] = useState([
     {
@@ -72,33 +87,80 @@ const PostTrainingScreen = ({navigation}) => {
       setRadioType(null);
       setRadioDuration(null);
       setRadioMode(null);
-      setRadioTOC(null)
-    },[]),
+      setRadioTOC(null);
+
+      setIsModeSelected(false);
+      setIsTypeSelected(false);
+      setIsDurationSelected(false);
+      setIsTocSelected(false);
+      setDurationValue(0);
+    }, []),
   );
-  
 
   //-----------------Radio options------------------------
 
-  const handleTypeTraining = (value) => {
-    setRadioType(value);
-    setTypeSelected(true);
+  const handleTypeTraining = index => {
+    setRadioType(index);
+    setIsTypeSelected(true);
   };
 
-  const handleDurationTraining = value => {
-    setRadioDuration(value);
-    //   setParticipantSelected(true)
-  };
-  const handleModeTraining = (value) => {
-    setRadioMode(value);
-    setModeSelected(true);
+  const handleDurationTraining = (option, index) => {
+    setRadioDuration(index);
+    setIsDurationSelected(true);
+    setIsButtonPressed(false);
+    // if(option.label == 'Hourly'){
+    //   setDurationLabel('Hrs');
+    //   setDurationValue(0);
+
+    // } else if(option.label == 'Day'){
+    //   setDurationLabel('Days');
+    //   setDurationValue(0);
+    // } else if(option.label == "Month"){
+    //   setDurationLabel('Month');
+    //   setDurationValue(0);
+    // };
+
+    switch (option.label.toLowerCase()) {
+      case 'hourly':
+        setDurationLabel('Hrs');
+        setDurationValue(0);
+        break;
+      case 'day':
+        setDurationLabel('Days');
+        setDurationValue(0);
+        break;
+      case 'month':
+        setDurationLabel('Month');
+        setDurationValue(0);
+        break;
+      default:
+        setDurationLabel('Hrs');
+    }
     //   setParticipantSelected(true)
   };
 
-  const handleTOC = (value) =>{
-    setRadioTOC(value);
-  }
+  const handleModeTraining = (option, index) => {
+    setRadioMode(index);
+    if (option.label == 'Offline') {
+      setIsModeSelected(true);
+    } else {
+      setIsModeSelected(false);
+    }
+    //   setParticipantSelected(true)
+  };
+
+  const handleTOC = (option, index) => {
+    setRadioTOC(index);
+    setIsClickedUpload(false);
+
+    if (option.label == 'Available') {
+      setIsTocSelected(true);
+    } else {
+      setIsTocSelected(false);
+    }
+  };
   //------------------Down Picker---------------------------
-  const handleTechTextChange = (val) => {
+  const handleTechTextChange = val => {
     setCurrentTech(val);
     setCustomStyle({
       fontSize3: val.length <= 0 ? 14 : 18,
@@ -107,29 +169,44 @@ const PostTrainingScreen = ({navigation}) => {
     setTechError('');
   };
 
-  const handleCurrency = (val) => {
-    setIsCurrency(val);
-  };
   //--------------Slider------------------------
-  const handleSliderChange = (value) => {
+  const handleSliderChange = value => {
     setSliderValue(value);
   };
   //-------------Increment and Decrement----------------------
   const handleIncParticipant = () => {
-    setIncDecParticipant(incDecParticipant + 1);
+    setParticipantValue(participantValue + 1);
   };
 
   const handleDecParticipant = () => {
-    if (incDecParticipant > 0) {
-      setIncDecParticipant(incDecParticipant - 1);
+    if (participantValue > 0) {
+      setParticipantValue(participantValue - 1);
     }
+  };
+
+  const handleDurationInc = () => {
+    setIsButtonPressed(true);
+    setDurationValue(durationValue + 1);
+  };
+  const handleDurationDec = () => {
+    if (durationValue > 0) {
+      setDurationValue(durationValue - 1);
+      setIsButtonPressed(true);
+    }
+  };
+
+  //------------Upload file--------------
+
+  const HandleUploadFile = () => {
+    setIsClickedUpload(true);
+    setUploadFileName('FileName');
   };
 
   //-----------------Check box---------------
 
-  const handleCheckbox =()=>{
-    setToggleCheckBox(true)
-  }
+  const handleCheckbox = () => {
+    setToggleCheckBox(true);
+  };
 
   //-------------------Sumbit trainer-------------
   const submitTrainerPost = () => {
@@ -137,13 +214,14 @@ const PostTrainingScreen = ({navigation}) => {
 
     // Automatically hide the half-screen after 3 seconds
     setTimeout(() => {
-      setSubmitPost(false)
+      setSubmitPost(false);
     }, 3000);
   };
 
   return (
     <View style={styles.postTrainingContainer}>
-      <ScrollView style={{width: '95%', marginLeft: '5%', marginTop: '5%'}}>
+      <ScrollView
+        style={{width: '95%', marginLeft: '5%', marginTop: '5%', flexGrow: 1}}>
         <Text style={styles.companyNameText}>Company Name</Text>
         <TextInput
           style={[
@@ -158,7 +236,7 @@ const PostTrainingScreen = ({navigation}) => {
           onChangeText={text => {
             setCompanyName(text);
             setCustomStyle({
-              fontSize1: text.length <= 0 ? 10 : 16,
+              fontSize1: text.length <=0 ? 10 : 16,
               fontWeight1: text.length <= 0 ? '400' : '500',
             });
             setCompanyError('');
@@ -188,7 +266,7 @@ const PostTrainingScreen = ({navigation}) => {
             ]}
             dropDownContainerStyle={styles.dropDownContainerStyle1}
             //  selectedItemLabelStyle={{color:'#E9E9E9', fontSize:14, fontWeight:'400'}}
-            maxHeight={200}
+            maxHeight={300}
             autoScroll
             showArrowIcon={false}
             showTickIcon={true}
@@ -201,7 +279,7 @@ const PostTrainingScreen = ({navigation}) => {
             badgeDotColors={['#8A8A8A80']}
             badgeColors={['#8A8A8A80']}
             searchable
-            dropDownDirection="TOP"
+            //    dropDownDirection="TOP"
           />
         </View>
         {/* {techError !== '' && (
@@ -241,20 +319,22 @@ const PostTrainingScreen = ({navigation}) => {
             ))}
           </RadioForm>
         </View>
-        {typeSelected && (
-          <View style={{marginBottom:'3%'}}>
+        {isTypeSelected ? (
+          <View style={{marginBottom: '3%'}}>
             <Text style={styles.participantsText}>Total Participants</Text>
             <View style={styles.totalParticipantsView}>
               <TouchableOpacity onPress={() => handleDecParticipant()}>
                 <Text>-</Text>
               </TouchableOpacity>
-              <Text>{incDecParticipant}</Text>
+              <Text style={styles.participantValueText}>
+                {participantValue}
+              </Text>
               <TouchableOpacity onPress={() => handleIncParticipant()}>
                 <Text>+</Text>
               </TouchableOpacity>
             </View>
           </View>
-        )}
+        ) : null}
 
         <Text style={styles.modeTrainingText}>Mode Of training</Text>
         <View style={styles.radioFormView}>
@@ -266,7 +346,7 @@ const PostTrainingScreen = ({navigation}) => {
                   obj={{label: option.label, value: index}}
                   index={index}
                   isSelected={radioMode === index}
-                  onPress={() => handleModeTraining(index)}
+                  onPress={() => handleModeTraining(option, index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
                   buttonOuterColor={'#EAEAEA'}
@@ -279,7 +359,7 @@ const PostTrainingScreen = ({navigation}) => {
                   obj={{label: option.label, value: index}}
                   index={index}
                   labelHorizontal={true}
-                  onPress={() => handleModeTraining(index)}
+                  onPress={() => handleModeTraining(option, index)}
                   labelStyle={{
                     fontSize: 14,
                     color: '#535353',
@@ -290,13 +370,11 @@ const PostTrainingScreen = ({navigation}) => {
             ))}
           </RadioForm>
         </View>
-                  {
-                    modeSelected && (
-                      <View>
-                          <SearchLocation locationData={SearchLocationData}/>
-                      </View>
-                    )
-                  }
+        {isModeSelected ? (
+          <View>
+            <SearchLocation myLocation={Locations} />
+          </View>
+        ) : null}
         <Text style={styles.experienceText}>Experience</Text>
         <Text style={styles.dragExpText}>Drag to select a experience</Text>
         <Slider
@@ -310,7 +388,10 @@ const PostTrainingScreen = ({navigation}) => {
           maximumTrackTintColor="#D9D9D9" // Customize the color of the remaining track
           thumbTintColor="#2676C2" // Customize the color of the thumb
         />
-        <Text style={styles.sliderValueStyle}>Years: {sliderValue}</Text>
+
+        <View style={styles.sliderValueView}>
+          <Text style={styles.sliderValueStyle}>{sliderValue} years</Text>
+        </View>
 
         <Text style={styles.durationText}>Duration Of Training</Text>
 
@@ -323,7 +404,7 @@ const PostTrainingScreen = ({navigation}) => {
                   obj={{label: option.label, value: index}}
                   index={index}
                   isSelected={radioDuration === index}
-                  onPress={() => handleDurationTraining(index)}
+                  onPress={() => handleDurationTraining(option, index)}
                   borderWidth={1}
                   buttonInnerColor={'#2676C2'}
                   buttonOuterColor={'#EAEAEA'}
@@ -335,7 +416,7 @@ const PostTrainingScreen = ({navigation}) => {
                   obj={{label: option.label, value: index}}
                   index={index}
                   labelHorizontal={true}
-                  onPress={() => handleDurationTraining(index)}
+                  onPress={() => handleDurationTraining(option, index)}
                   labelStyle={{
                     fontSize: 14,
                     color: '#535353',
@@ -346,150 +427,125 @@ const PostTrainingScreen = ({navigation}) => {
             ))}
           </RadioForm>
         </View>
+
+        {isDurationSelected ? (
+          <View style={{marginBottom: '3%'}}>
+            <View style={styles.durationView}>
+              <TouchableOpacity onPress={() => handleDurationDec()}>
+                <Text>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.incDecDurationText}>
+                {isButtonPressed ? durationValue : durationLabel}
+              </Text>
+              <TouchableOpacity onPress={() => handleDurationInc()}>
+                <Text>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null}
 
         <Text style={styles.budgetText}>Budgets</Text>
-
-        <View style={styles.currencyView}>
-          <View>
-          <DropDownPicker
-            items={Currency}
-            open={isCurrency}
-            setOpen={() => setIsCurrency(!isOpen)}
-            value={null}
-            setValue={val => {
-              handleCurrency(val);
-            }}
-            placeholder="IND"
-           // placeholderStyle={styles.dropDownPlaceholderStyle}
-            style={[
-              styles.currencyDropDown,
-              {
-                fontSize: customStyle.fontSize2,
-                fontWeight: customStyle.fontWeight2,
-                color: customStyle.color,
-              },
-            ]}
-            dropDownContainerStyle={styles.currencyDropDownContainer}
-            selectedItemLabelStyle={{
-              color: 'black',
-              fontSize: 14,
-              fontWeight: '400',
-            }}
-            disableBorderRadius={false}
-            showArrowIcon={true}
-            showTickIcon={true}
-            closeOnBackPressed={true}
-            dropDownDirection="TOP"
-          />
-          </View>
-            <View style={styles.verticalLine1}/>
-          <View style={{flexDirection:'row', right:'12%'}}>
-          <TextInput
-            style={styles.minInput}
-            placeholder="Min"
-            value={minInput}
-            onChangeText={text => {
-              setMinInput(text);
-              // setCompanyError('');
-            }}
-            autoCapitalize="none"
-            placeholderTextColor={'#535353'}
-          />
-<View style={styles.verticalLine2}/>
-        <TextInput
-            style={styles.maxInput}
-            placeholder="Max"
-            value={maxInput}
-            onChangeText={text => {
-              setMaxInput(text);
-              // setCompanyError('');
-            }}
-            autoCapitalize="none"
-            placeholderTextColor={'#535353'}
-          />
-          </View>
-          <View></View>
-        </View>
+        <MyBudget myCurrency={Currency} />
 
         <View style={styles.tocView}>
-                <View style={{flexDirection:'row', marginBottom:'2%'}}>
-                <Text style={styles.tocText1}>Toc</Text>
-                <Text style={styles.tocText2}>(Table of content)</Text>
-                </View>
-            <View>
+          <View style={{flexDirection: 'row', marginBottom: '2%'}}>
+            <Text style={styles.tocText1}>Toc</Text>
+            <Text style={styles.tocText2}>(Table of content)</Text>
+          </View>
+          <View>
             <RadioForm formHorizontal={true} animation={true}>
-            {TOC.map((option, index) => (
-              <RadioButton labelHorizontal={true} key={index}>
-                {/* Radio button input */}
-                <RadioButtonInput
-                  obj={{label: option.label, value: index}}
-                  index={index}
-                  isSelected={radioTOC === index}
-                  onPress={() => handleTOC(index)}
-                  borderWidth={1}
-                  buttonInnerColor={'#2676C2'}
-                  buttonOuterColor={'#EAEAEA'}
-                  buttonSize={12}
-                  buttonOuterSize={16}
-                  buttonWrapStyle={{marginLeft:'5%', alignSelf: 'center',}}
-                />
-                {/* Radio button label */}
-                <RadioButtonLabel
-                  obj={{label: option.label, value: index}}
-                  index={index}
-                  labelHorizontal={true}
-                  onPress={() => handleTOC(index)}
-                  labelStyle={{
-                    fontSize: 14,
-                    color: '#535353',
-                    fontWeight: '400',
-                  }}
-                />
-              </RadioButton>
-            ))}
-          </RadioForm>
-            </View>
+              {TOC.map((option, index) => (
+                <RadioButton labelHorizontal={true} key={index}>
+                  {/* Radio button input */}
+                  <RadioButtonInput
+                    obj={{label: option.label, value: index}}
+                    index={index}
+                    isSelected={radioTOC === index}
+                    onPress={() => handleTOC(option, index)}
+                    borderWidth={1}
+                    buttonInnerColor={'#2676C2'}
+                    buttonOuterColor={'#EAEAEA'}
+                    buttonSize={12}
+                    buttonOuterSize={16}
+                    buttonWrapStyle={{marginLeft: '5%', alignSelf: 'center'}}
+                  />
+                  {/* Radio button label */}
+                  <RadioButtonLabel
+                    obj={{label: option.label, value: index}}
+                    index={index}
+                    labelHorizontal={true}
+                    onPress={() => handleTOC(index)}
+                    labelStyle={{
+                      fontSize: 14,
+                      color: '#535353',
+                      fontWeight: '400',
+                    }}
+                  />
+                </RadioButton>
+              ))}
+            </RadioForm>
+          </View>
         </View>
+        {isTocSelected ? (
+          <View>
+            <Text style={styles.uploadText}>Upload</Text>
+            <View style={styles.tocSelectedView}>
+              <Text style={{alignSelf: 'center', marginLeft: '2%'}}>
+                {!isClickedUpload ? 'Upload a file' : uploadFileName}
+              </Text>
+              <TouchableOpacity
+                style={{alignSelf: 'center', marginRight: '3%'}}
+                onPress={() => HandleUploadFile()}>
+                <Image
+                  source={require('../../assets/icons/upload.png')}
+                  style={{width: 15, height: 15, resizeMode: 'contain'}}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null}
 
         <View style={styles.startEndDateView}>
-                    <View style={styles.startDateView}>
-                      <Text style={styles.startDate}>Start Date</Text>
-                      <DatePicker/>
-                    </View>
+          <View style={styles.startDateView}>
+            <Text style={styles.startDate}>Start Date</Text>
+            <DatePicker />
+          </View>
 
-                    <View>
-                      <Text style={styles.endDate}>End Date</Text>
-                      <DatePicker/>
-                    </View>
+          <View>
+            <Text style={styles.endDate}>End Date</Text>
+            <DatePicker />
+          </View>
         </View>
 
-        <View style={{flexDirection:'row', marginBottom:'3%'}}>
+        <View style={{flexDirection: 'row', marginBottom: '3%'}}>
           <CheckBox
             value={toggleCheckBox}
             onValueChange={() => handleCheckbox()}
-           tintColors={{true: '#2676C2', false: '#EAEAEA'}}
-            onFillColor='red'
-            onCheckColor='red'
+            tintColors={{true: '#2676C2', false: '#EAEAEA'}}
+            onFillColor="red"
+            onCheckColor="red"
           />
-            <Text style={styles.checkBoxText}>If you urgently need the trainer</Text>
-          </View>
+          <Text style={styles.checkBoxText}>
+            If you urgently need the trainer
+          </Text>
+        </View>
 
-          <View style={styles.buttonsView}>
-            <View style={styles.resetButton}>
-              <TouchableOpacity>
-                <Text style={styles.resetText}>Reset</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.submitButton}>
-            <TouchableOpacity onPress={()=>{submitTrainerPost()}}>
-                <Text style={styles.submitText}>Submit</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.buttonsView}>
+          <View style={styles.resetButton}>
+            <TouchableOpacity>
+              <Text style={styles.resetText}>Reset</Text>
+            </TouchableOpacity>
           </View>
-          {submitPost && ( 
-            <SubmitSuccess/>
-          )}
-
+          <View style={styles.submitButton}>
+            <TouchableOpacity
+              onPress={() => {
+                submitTrainerPost();
+              }}>
+              <Text style={styles.submitText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        {submitPost && <SubmitSuccess />}
       </ScrollView>
     </View>
   );

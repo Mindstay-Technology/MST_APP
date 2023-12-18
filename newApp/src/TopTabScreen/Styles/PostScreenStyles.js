@@ -67,22 +67,22 @@ export default StyleSheet.create({
         backgroundColor: '#ffffff',
         borderWidth: 1.3,
         width: '95%',
+        height: 85,
         borderColor: '#E3E3E3',
         borderRadius: 10,
-        // fontSize: 14,
-        //fontWeight: '400',
         marginBottom: '3%',
-        height: 85,
         color: '#8A8A8A80',
-        //overflow:'scroll'
+        overflow:'visible',
+        justifyContent:'center'
       },
       dropDownContainerStyle1: {
-        backgroundColor: 'red',
+        backgroundColor: 'lightgreen',
         width: '95%',
-        height:200,
-        borderColor: '#E3E3E3',
+        height:300,
+        borderColor:'red', // '#E3E3E3',
         borderRadius: 10,
-        position:'absolute'
+        marginBottom:'3%',
+        overflow:"visible"
       },
       techErrorStyle: {
         color: 'red',
@@ -117,6 +117,13 @@ export default StyleSheet.create({
         borderRadius:10,
         marginBottom:'3%'
       },
+      incDecParticipantText:{
+        color:'#2676C2',
+        fontSize:12,
+        fontWeight:'400',
+        alignSelf:'center'
+      },
+
       modeTrainingText:{
         color: '#333333',
         fontSize: 14,
@@ -139,11 +146,21 @@ export default StyleSheet.create({
         justifyContent:'center',
         marginBottom:'1%',
       },
+      sliderValueView:{
+        width:'15%',
+        height:25,
+        borderRadius:4,
+        borderWidth:1,
+        borderColor:'#BEBEBE33',
+        marginBottom:'3%',
+        justifyContent:'center'
+
+      },
       sliderValueStyle:{
         color:'#888888',
         fontSize:12,
         fontWeight:'500',
-        marginBottom:'3%'
+        alignSelf:'center'
       },
       durationText:{
         color: '#333333',
@@ -151,80 +168,50 @@ export default StyleSheet.create({
         fontWeight: '500',
         marginBottom:'2%',
       },
+      durationView:{
+        flexDirection:'row',
+        justifyContent:'space-around',
+        width:'40%',
+        height:25,
+        borderColor:'#E3E3E3',
+        borderWidth:1,
+        borderRadius:10,
+        marginBottom:'3%'
+      },
+      incDecDurationText:{
+        color:'#2676C2',
+        fontSize:12,
+        fontWeight:'400',
+        alignSelf:'center'
+      },
+
       budgetText:{
         color: '#333333',
         fontSize: 14,
         fontWeight: '500',
         marginBottom:'2%',
       },
-      currencyView:{
-      flexDirection:'row',
-       width:'70%',
-        height:52,
-        borderWidth:1,
-        borderColor:'#E3E3E3',
-        borderRadius:8,
-        marginBottom:'4%',
-    
-      },
-      currencyDropDown: {
-         fontSize: 14,
-        fontWeight: '400',
-        marginBottom: '3%',
-        color: '#535353',
-        backgroundColor: '#ffffff',
-        borderWidth: 1,
-       width: '70%',
-        borderColor: '#ffffff',
-        justifyContent:'center'
-        //overflow:'scroll'
-      },
-      currencyDropDownContainer: {
-        width: '30%',
-        backgroundColor: 'red',
-        height:200,
-        borderColor: '#E3E3E3',
-        borderRadius: 10,
-        position:'absolute'
-      },
-      minInput: {
-        color: '#888888',
-        backgroundColor: '#ffffff',
-        fontSize:14,
-        fontWeight:'400',
-        width:'40%',
-       // borderWidth:1,
-     //   borderColor:'#E3E3E3',
-   //     position:'relative',
-      //  right:'210%',
-        textAlign:'center',
-       
-      },
-      maxInput: {
-        color: '#888888',
-        backgroundColor: '#ffffff',
-        fontSize:14,
-        fontWeight:'400',
-        width:'40%',
-       // borderWidth:1,
-     //   borderColor:'#E3E3E3',
-        textAlign:'center',
-       // left:'1%'
-     //   position:'relative',
-       // right:'210%'
-      },
-      verticalLine1:{
-        height:50,
-        width:1,
-        backgroundColor:'#E3E3E3',
-        right:'65%'
-      },
-      verticalLine2:{
-        height:50,
-        width:1,
-        backgroundColor:'#E3E3E3',
-      //  borderWidth:1,
-      },
+      
+      // currencyDropDown: {
+      //    fontSize: 14,
+      //   fontWeight: '400',
+      //   marginBottom: '3%',
+      //   color: '#535353',
+      //   backgroundColor: 'green',
+      //   borderWidth: 1,
+      //  width: '70%',
+      //   borderColor: '#ffffff',
+      //   justifyContent:'center',
+      //   //overflow:'scroll'
+      // },
+      // currencyDropDownContainer: {
+      //   width: '70%',
+      //   backgroundColor: 'red',
+      //   height:150,
+      //   borderColor: '#E3E3E3',
+      //   borderRadius: 10,
+      // },
+      
       tocView:{
         marginBottom:'5%'
       },
@@ -240,6 +227,24 @@ export default StyleSheet.create({
         fontWeight: '400',
         alignSelf:'center'
       },
+      uploadText:{
+        marginBottom:'2%',
+        color: '#333333',
+        fontSize: 14,
+        fontWeight: '400',
+      },
+      tocSelectedView:{
+        flexDirection:'row',
+        justifyContent:'space-between',        
+        width:'60%',
+        height:40,
+        borderWidth:1,
+        borderColor:'#E3E3E3',
+        borderRadius:4,
+        marginBottom:'3%',
+        
+
+      },
       startEndDateView:{
         flexDirection:'row',
         marginBottom:'3%'
@@ -252,13 +257,16 @@ export default StyleSheet.create({
         color: '#333333',
         fontSize: 14,
         fontWeight: '500',
-        marginBottom:'5%'
+        marginBottom:'5%',
+        marginRight:'4%'
       },
       endDate:{
         color: '#333333',
         fontSize: 14,
         fontWeight: '500',
-        marginBottom:'4%'
+        marginBottom:'4%',
+        marginRight:'4%'
+
       },
 
       checkBoxText:{

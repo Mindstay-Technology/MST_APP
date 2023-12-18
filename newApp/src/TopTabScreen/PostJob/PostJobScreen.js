@@ -1,10 +1,19 @@
 import { View, Text , ScrollView, TouchableOpacity, TextInput, Image} from 'react-native'
 import React, {useState} from 'react'
-import styles from './Styles/PostScreenStyles';
+import styles from '../Styles/PostScreenStyles';
+import DropDownPicker from 'react-native-dropdown-picker';
 import Slider from '@react-native-community/slider';
-import { SubmitSuccess } from './PostDataSuccess';
+import { SubmitSuccess } from '../PostDataSuccess';
+import {
+  Skills,
+} from '../../constants/Constants';
+import Qualification from './Qualication';
 
 const PostJobScreen = () => {
+
+  const [isSkills, setIsSkills] = useState(false);
+  const [currentTech, setCurrentTech] = useState(null);
+
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescText, setJobDescText] = useState('');
   const [sliderValue, setSliderValue] = useState(0); // Initial value
@@ -13,6 +22,7 @@ const PostJobScreen = () => {
   const [overview, setOverview] = useState('');
   const [submitPost, setSubmitPost] = useState(false);
   const [resetPost, setResetPost] = useState(false);
+  
 
   const [customStyle, setCustomStyle] = useState([
     {
@@ -30,6 +40,16 @@ const PostJobScreen = () => {
     },
   ]);
 
+
+//------------------Down Picker Skills---------------------------
+const handleTechTextChange = val => {
+  setCurrentTech(val);
+  setCustomStyle({
+    fontSize3: val.length <= 0 ? 14 : 18,
+    fontWeight3: val.length <= 0 ? '400' : '500',
+  });
+  //setTechError('');
+};
 //--------------Slider------------------------
 const handleSliderChange = (value) => {
   setSliderValue(value);
@@ -93,7 +113,45 @@ const handleSliderChange = (value) => {
           autoCapitalize="none"
           placeholderTextColor={'#888888'}
         />
-
+        <Text>Qualification</Text>
+        <Qualification />
+<View>
+          <Text style={styles.technologyText}>Skills</Text>
+          <DropDownPicker
+            items={Skills}
+            open={isSkills}
+            setOpen={() => setIsSkills(!isSkills)}
+            value={currentTech}
+            setValue={val => {
+              handleTechTextChange(val);
+            }}
+            placeholder=""
+            // placeholderStyle={styles.dropDownPlaceholderStyle}
+            style={[
+              styles.dropDownSkillStyle,
+              {
+                fontSize: customStyle.fontSize3,
+                fontWeight: customStyle.fontWeight3,
+              },
+            ]}
+            dropDownContainerStyle={styles.dropDownContainerStyle1}
+            //  selectedItemLabelStyle={{color:'#E9E9E9', fontSize:14, fontWeight:'400'}}
+            maxHeight={300}
+            autoScroll
+            showArrowIcon={false}
+            showTickIcon={true}
+            disableBorderRadius={false}
+            multiple={true}
+            min={1}
+            max={10}
+            mode="BADGE"
+            badgeTextStyle={{color: '#8A8A8A80'}}
+            badgeDotColors={['#8A8A8A80']}
+            badgeColors={['#8A8A8A80']}
+            searchable
+            //    dropDownDirection="TOP"
+          />
+        </View>
 
 <Text style={styles.experienceText}>Experience</Text>
         <Text style={styles.dragExpText}>Drag to select a experience</Text>
@@ -108,7 +166,9 @@ const handleSliderChange = (value) => {
           maximumTrackTintColor="#D9D9D9" // Customize the color of the remaining track
           thumbTintColor="#2676C2" // Customize the color of the thumb
         />
-        <Text style={styles.sliderValueStyle}>Years: {sliderValue}</Text>
+        <View style={styles.sliderValueView}>
+            <Text style={styles.sliderValueStyle}>{sliderValue} years</Text>
+            </View>
 
         <Text style={styles.jobTitleText}>Location</Text>
         <TextInput

@@ -57,7 +57,7 @@ const DatePicker = () => {
 };
 const styles = StyleSheet.create({
   dateContainer: {
-    width: 110,
+    width: '110%',
     height: 35,
     borderColor: '#E3E3E3',
     borderWidth: 1,

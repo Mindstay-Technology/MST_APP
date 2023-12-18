@@ -1,8 +1,8 @@
 import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import PostJobScreen from './PostJobScreen';
-import PostTrainingScreen from './PostTrainingScreen';
+import PostJobScreen from './PostJob/PostJobScreen';
+import PostTrainingScreen from './PostTraining/PostTrainingScreen';
 import styles from './Styles/PostScreenStyles';
 
 const Tab = createMaterialTopTabNavigator();
